@@ -21,7 +21,7 @@ CRobotHighLevel::~CRobotHighLevel()
 
 void CRobotHighLevel::Move(uint16_t gonioValue, eGonioType gonioType, uint64_t time)
 {
-    m_spCRobotLowLevel->Move(ToPwm(gonioValue, gonioType), time);
+    m_spCRobotLowLevel->Move(ToPwm(gonioValue % DEGREES_IN_CIRCLE, gonioType), time);
 }
 
 void CRobotHighLevel::TriggerEmergencyStop()
@@ -37,12 +37,12 @@ uint16_t CRobotHighLevel::ToPwm(uint16_t gonioValue, eGonioType gonioType)
     {
         case eGonioType::DEGREE:
         {
-            returnValue = ((m_maxPWM / DEGREES_IN_CIRCLE) * gonioValue);
+            returnValue = ((static_cast<float>(m_maxPWM) / DEGREES_IN_CIRCLE) * gonioValue);
             break;
         }
         case eGonioType::RADIAN:
         {
-            returnValue = ((static_cast<float>(m_maxPWM)) / RADIANS_IN_CIRCLE * gonioValue);
+            returnValue = ((static_cast<float>(m_maxPWM) / RADIANS_IN_CIRCLE) * gonioValue);
             break;
         }
     }

@@ -16,7 +16,7 @@ private:
     bool IsHardwareCompatible(uint16_t pwm);
     bool WriteToSerialPort(const std::string& message);
 
-    uint16_t m_maxPWM = 1023;
+    uint16_t m_maxPWM = 180;
     std::string m_serialPort = "/dev/ttyACM0";
 };
 

@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
     {
         CRobotHighLevel robot;
         robot.Move(std::stoi(argv[1]), eGonioType(std::stoi(argv[2])), std::stoi(argv[3]));
-        std::cout << "Arm moving to: " << argv[1] << " " << argv[2] << " in: " << argv[3] << "milliseconds" << std::endl;
+        std::cout << "Arm moving to: " << argv[1] << " , " << argv[2] << " in: " << argv[3] << " milliseconds" << std::endl;
     }
     return 0;
 }

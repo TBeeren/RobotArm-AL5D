@@ -2,6 +2,7 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <thread>
+#include <bitset>
 
 CRobotLowLevel::CRobotLowLevel(/* args */)
 {
@@ -16,6 +17,12 @@ bool CRobotLowLevel::Move(uint16_t pwm, uint64_t time)
     if (IsHardwareCompatible(pwm))
     {
         WriteToSerialPort(ToProtocolMessage(pwm, time));
+        return true;
+    }
+    else
+    {
+        std::cout << "Max value for degrees: 360 " << std::endl; 
+        return false;
     }
 }
 
@@ -36,7 +43,7 @@ std::string CRobotLowLevel::ToProtocolMessage(uint16_t pwm, uint64_t time)
 
 bool CRobotLowLevel::IsHardwareCompatible(uint16_t pwm)
 {
-    return ((pwm <= m_maxPWM) && (pwm > 0));
+    return ((pwm <= m_maxPWM) && (pwm >= 0));
 }
 
 bool CRobotLowLevel::WriteToSerialPort(const std::string &message)
@@ -59,7 +66,6 @@ bool CRobotLowLevel::WriteToSerialPort(const std::string &message)
 	    boost::asio::write(serial, b.data());
 	    os.flush();
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
      	}
 
         if (serial.is_open()) {
