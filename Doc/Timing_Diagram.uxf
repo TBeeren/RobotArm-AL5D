@@ -6,14 +6,13 @@
       <x>260</x>
       <y>340</y>
       <w>710</w>
-      <h>160</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>*RobotArmController*
 
+EMERGENCY STOP
 
-STATE Y
-
-STATE X
+MOVE
 
 IDLE
 halign=left</panel_attributes>
@@ -31,12 +30,97 @@ halign=left</panel_attributes>
 *LynxMotion AL5D*
 
 
-STATE Y
+STOP
 
-STATE X
+MOVE
 
 IDLE
 halign=left</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>410</y>
+      <w>70</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;50.0;40.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>370</y>
+      <w>520</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;50.0;240.0;50.0;240.0;80.0;340.0;80.0;340.0;10.0;500.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>240</y>
+      <w>630</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;70.0;130.0;70.0;130.0;40.0;340.0;40.0;340.0;70.0;450.0;70.0;450.0;10.0;610.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>300</y>
+      <w>120</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+Serial
+[0..17.8ms]</panel_attributes>
+    <additional_attributes>10.0;120.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>260</y>
+      <w>240</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>[0..65535ms] </panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>300</y>
+      <w>100</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+moveDone</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>300</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+
+Serial
+[0..2.1ms]</panel_attributes>
+    <additional_attributes>10.0;80.0;20.0;10.0</additional_attributes>
   </element>
 </diagram>
