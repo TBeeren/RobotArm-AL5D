@@ -70,8 +70,8 @@ void parse()
     emergencyStop = true; 
   }
   movementInterval = (double((position - targetPosition)) / double(duration_millis));
-  Serial.print("movementinterval to: ");
-  Serial.println(movementInterval);
+  //Serial.print("movementinterval to: ");
+  //Serial.println(movementInterval);
   movementStartMillis = millis();
   message = "";
   positionString = "";
@@ -82,22 +82,22 @@ void move()
 {
   if(movementInterval < 0.0)
   {
-    Serial.print("move to: ");
-    Serial.println(position);
+    //Serial.print("move to: ");
+    //Serial.println(position);
     if(((targetPosition - 1 >= position) && (position <= targetPosition + 1)))
     {
-      Serial.println("not at the right position");
+      //Serial.println("not at the right position");
       position -= movementInterval * ((millis() - movementStartMillis)) ;
       servo.write(position);
     }
   }
   else if (movementInterval > (0.0))
   {
-    Serial.print("move to: ");
-    Serial.println(position);
+    //Serial.print("move to: ");
+    //Serial.println(position);
     if(((targetPosition - 1 <= position) && (position >= targetPosition + 1)))
     {
-      Serial.println("not at the right position");
+      //Serial.println("not at the right position");
       position -= movementInterval * ((millis() - movementStartMillis)) ;
       servo.write(position);
     }
@@ -110,7 +110,7 @@ int makeAbsolute(int value)
 {
   if(value < 0)
   {
-    Serial.println(value * -1);
+    //Serial.println(value * -1);
     return (value * -1);
   }
   return value;

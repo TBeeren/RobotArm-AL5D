@@ -7,7 +7,11 @@ project(RobotArmController)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+	roscpp
+	std_msgs
+ 	message_generation	
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -43,11 +47,12 @@ find_package(catkin REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+	DIRECTORY
+	msg	
+	FILES
+	State.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -64,10 +69,10 @@ find_package(catkin REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+	DEPENDENCIES
+	std_msgs  
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -101,7 +106,7 @@ find_package(catkin REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES RobotArmController
-#  CATKIN_DEPENDS other_catkin_pkg
+	CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -113,7 +118,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-# ${catkin_INCLUDE_DIRS}
+	${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -200,3 +205,28 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_subdirectory(src/RobotHighLevel)
+add_subdirectory(src/RobotLowLevel)
+
+SET(SOURCES
+	src/main.cpp
+	src/CEvent.cpp
+	src/CRobotContext.cpp
+	src/CServoInstruction.cpp
+	src/CStatePublisher.cpp
+	src/CStates.cpp
+)
+
+SET(HEADERS
+	src/CEvent.h
+	src/CRobotContext.h
+	src/CServoInstruction.h
+	src/CStatePublisher.h
+	src/CStates.h
+	src/IRobotStates.h
+)
+
+add_executable(RobotArmController ${SOURCES} ${HEADERS})
+target_link_libraries(RobotArmController ${catkin_LIBRARIES} RobotHighLevel RobotLowLevel)
+add_dependencies(RobotArmController RobotArmController_generate_messages_cpp)
