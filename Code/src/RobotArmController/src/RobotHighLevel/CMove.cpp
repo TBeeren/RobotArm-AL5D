@@ -13,6 +13,7 @@
 
 #include "../CServoInstruction.h"
 #include "../RobotLowLevel/CCommandAL5D.h"
+#include <assert.h>
 
 CMove::CMove()
 : m_spExecuteCommand(std::make_shared<CCommandAL5D>())
@@ -23,11 +24,17 @@ CMove::~CMove()
 {
 }
 
-void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
+void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions)
 {
-}
+    assert(rServoInstructions.size() != 0);
 
-void CMove::Move(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
-{
-    m_spExecuteCommand->Move();
+    for(const auto& rInstruction : rServoInstructions)
+    {
+        m_spExecuteCommand->AppendInstruction(
+            eCommand, 
+            rInstruction->GetTargetServo(), 
+            rInstruction->GetSpeed(), 
+            rInstruction->GetDuration()
+        );
+    }
 }

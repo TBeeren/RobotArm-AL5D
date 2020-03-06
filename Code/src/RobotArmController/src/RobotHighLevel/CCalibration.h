@@ -27,7 +27,7 @@ public:
     explicit CCalibration(std::shared_ptr<CConfiguration> spConfiguration);
     virtual ~CCalibration();
 
-    void ExecuteMovement(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);
+    void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);
 
 private:
     bool WriteConfig(eServos eServo, uint16_t minValue, uint16_t maxValue);

@@ -97,6 +97,8 @@ std::string CCommandAL5D::CreateMessage()
         std::fill(m_speedArray.begin(), m_speedArray.end(), 0);
     }
 
+    std::cout << returnMessage << std::endl;
+    
     return returnMessage;
 }
 

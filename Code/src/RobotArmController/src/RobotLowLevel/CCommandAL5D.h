@@ -33,7 +33,6 @@ public:
     CCommandAL5D();
     ~CCommandAL5D();
 
-    void Move() override;
     void Stop() override;
     void Write(const std::string& rMessage) override;
     void AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration) override;

@@ -24,9 +24,9 @@ CCalibration::~CCalibration()
 {
 }
 
-void CCalibration::ExecuteMovement(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
+void CCalibration::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
 {   
-    //m_spMove->Execute();
+    m_spMove->Execute(eCommand, rServoIntructions);
 }
     
 bool CCalibration::WriteConfig(eServos eServo, uint16_t minValue, uint16_t maxValue)

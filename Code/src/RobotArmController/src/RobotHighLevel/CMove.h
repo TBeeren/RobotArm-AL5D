@@ -15,8 +15,7 @@ public:
     CMove();
     ~CMove();
 
-    void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);
-    void Move(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);
+    void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions);
 
 private:
     std::shared_ptr<IExecuteCommand> m_spExecuteCommand;
