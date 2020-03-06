@@ -1,6 +1,9 @@
 #include "CStates.h"
 
-CIdleState::CIdleState()
+CIdleState::CIdleState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration)
+: IRobotStates()
+, m_rEvent(rEvent)
+, m_spConfiguration(spConfiguration)
 {
 }
 
@@ -21,7 +24,15 @@ void CIdleState::Exit()
 
 }
 
-CCalibrateState::CCalibrateState()
+void CIdleState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
+{
+
+}
+
+CCalibrateState::CCalibrateState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration)
+: IRobotStates()
+, m_rEvent(rEvent)
+, m_spConfiguration(spConfiguration)
 {
 }
 
@@ -42,7 +53,15 @@ void CCalibrateState::Exit()
     
 }
 
-CMoveState::CMoveState()
+void CCalibrateState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
+{
+
+}
+
+CMoveState::CMoveState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration)
+: IRobotStates()
+, m_rEvent(rEvent)
+, m_spConfiguration(spConfiguration)
 {
 }
 
@@ -63,7 +82,15 @@ void CMoveState::Exit()
     
 }
 
-CStopState::CStopState()
+void CMoveState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
+{
+
+}
+
+CStopState::CStopState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration)
+: IRobotStates()
+, m_rEvent(rEvent)
+, m_spConfiguration(spConfiguration)
 {
 }
 
@@ -84,3 +111,7 @@ void CStopState::Exit()
     
 }
 
+void CStopState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
+{
+
+}

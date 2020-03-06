@@ -52,6 +52,10 @@ add_message_files(
 	msg	
 	FILES
 	State.msg
+	Move.msg
+	ServoCommand.msg
+	EmergencyStop.msg
+	ProgrammedPosition.msg
 )
 
 ## Generate services in the 'srv' folder

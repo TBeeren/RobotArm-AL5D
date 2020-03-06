@@ -5,6 +5,8 @@ include(CTest)
 enable_testing()
 
 SET(SOURCES
+	CCalibration.cpp
+	CConfiguration.cpp
 	CMove.cpp
 )
 
