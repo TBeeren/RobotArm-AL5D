@@ -5,6 +5,7 @@ include(CTest)
 enable_testing()
 
 SET(SOURCES
+	CCommandAL5D.cpp
 	CCommunicate.cpp
 )
 

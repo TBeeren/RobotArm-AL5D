@@ -6,6 +6,8 @@ enable_testing()
 
 SET(SOURCES
 	CMove.cpp
+	CCalibration.cpp
+	CConfiguration.cpp
 )
 
 add_library(RobotHighLevel ${SOURCES})
