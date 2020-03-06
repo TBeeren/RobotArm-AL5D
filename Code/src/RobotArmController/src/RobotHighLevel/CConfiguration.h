@@ -1,3 +1,15 @@
+/**
+ * @file CConfiguration.h
+ * @author Tim Beeren (T.Beeren1@student.han.nl)
+ * @brief 
+ * @version 0.1
+ * @date 06-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
+
 #ifndef CCONFIGURATION_H
 #define CCONFIGURATION_H
 

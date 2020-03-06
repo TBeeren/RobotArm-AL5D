@@ -1,3 +1,14 @@
+/**
+ * @file CMove.cpp
+ * @author Tim Beeren (T.Beeren1@student.han.nl)
+ * @brief 
+ * @version 0.1
+ * @date 06-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #include "CMove.h"
 
 #include "../CServoInstruction.h"
@@ -14,31 +25,9 @@ CMove::~CMove()
 
 void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
 {
-    switch (eCommand)
-    {
-        case eCommand::MOVE:
-        {
-            Move(rServoIntructions);
-            break;
-        }
-        case eCommand::STOP:
-        {
-            //Send Stop Command
-            break;
-        }
-        case eCommand::UNKNOWN_COMMAND:
-        {
-            throw "Command is unknown! Please check your message on syntax";
-            break;
-        }
-        default:
-        {
-            break;
-        }
-    }
 }
 
 void CMove::Move(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
 {
-    //m_spExecuteCommand
+    m_spExecuteCommand->Move();
 }

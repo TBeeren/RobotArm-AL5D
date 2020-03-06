@@ -1,12 +1,26 @@
+/**
+ * @file IExecuteCommand.h
+ * @author Tim Beeren (T.Beeren1@student.han.nl)
+ * @brief 
+ * @version 0.1
+ * @date 06-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef IEXECUTECOMMAND_H
 #define IEXECUTECOMMAND_H
 
 #include <iostream>
 
-namespace
+// Enum Declaration
+enum eCommand 
 {
-    constexpr const uint8_t INSTRUCTION_ARRAY_SIZE = 5;
-}
+    MOVE_COMMAND = 0,
+    STOP_COMMAND = 1,
+    UNKNOWN_COMMAND = 2
+};
 
 class IExecuteCommand
 {
@@ -15,11 +29,11 @@ public:
     ~IExecuteCommand();
 
     virtual void Move() = 0;
-private:
+    virtual void Stop() = 0;
+    virtual void Write(const std::string& rMessage) = 0;
+    virtual void AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration) = 0;
 
-    uint64_t m_positionArray[INSTRUCTION_ARRAY_SIZE];
-    uint64_t m_speedArray[INSTRUCTION_ARRAY_SIZE];
-    uint64_t m_durationArray[INSTRUCTION_ARRAY_SIZE];
+private:
 
 };
 

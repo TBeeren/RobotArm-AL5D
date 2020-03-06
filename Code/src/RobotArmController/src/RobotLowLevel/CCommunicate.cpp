@@ -1,3 +1,14 @@
+/**
+ * @file CCommunicate.cpp
+ * @author Tim Beeren (T.Beeren1@student.han.nl)
+ * @brief 
+ * @version 0.1
+ * @date 06-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #include "CCommunicate.h"
 #include <iostream>
 

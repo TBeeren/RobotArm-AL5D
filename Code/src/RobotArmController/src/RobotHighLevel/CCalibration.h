@@ -1,3 +1,14 @@
+/**
+ * @file CCalibration.h
+ * @author Tim Beeren (T.Beeren1@student.han.nl)
+ * @brief 
+ * @version 0.1
+ * @date 06-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef CCALIBRATION_H
 #define CCALIBRATION_H
 
@@ -13,7 +24,7 @@ class CMove;
 class CCalibration
 {
 public:
-    explicit CCalibration(std::shared_ptr<CConfiguration> spConfiguration, std::shared_ptr<CMove> spMove);
+    explicit CCalibration(std::shared_ptr<CConfiguration> spConfiguration);
     virtual ~CCalibration();
 
     void ExecuteMovement(std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);

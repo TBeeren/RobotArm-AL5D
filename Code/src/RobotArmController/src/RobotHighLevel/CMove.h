@@ -3,19 +3,11 @@
 
 #include <vector>
 #include <memory>
+#include "../RobotLowLevel/IExecuteCommand.h"
 
 // Forward Declaration
 class CServoInstruction;
 class CCommandAL5D;
-class IExecuteCommand;
-
-// Enum Declaration
-enum eCommand 
-{
-    MOVE = 0,
-    STOP= 1,
-    UNKNOWN_COMMAND = 2
-};
 
 class CMove
 {
