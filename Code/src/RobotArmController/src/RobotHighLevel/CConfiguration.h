@@ -1,6 +1,8 @@
 #ifndef CCONFIGURATION_H
 #define CCONFIGURATION_H
 
+#include <map>
+
 // Enum Declaration
 enum eServos 
 {
@@ -13,13 +15,24 @@ enum eServos
     UNKNOWN = 6
 };
 
+enum eProgrammedPosition
+{
+    PARK,
+    READY,
+    STRAIGHT
+};
+
+
 class CConfiguration
 {
-private:
-    /* data */
 public:
     CConfiguration(/* args */);
     ~CConfiguration();
+
+    eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
+private:
+    std::map<eProgrammedPosition, std::string> programmedPositions;
+    /* data */
 };
 
 #endif /*CONFIGURATION_H*/

@@ -9,17 +9,17 @@ CEvent::CEvent(eEventType eventType)
 }
 
 
-CEvent::CEvent(eEventType eventType, bool preemptive, std::vector<CServoInstruction> servoInstructions)
+CEvent::CEvent(eEventType eventType, bool preemptive, std::vector<std::shared_ptr<CServoInstruction>> servoInstructions)
 : m_eventType(eventType)
 , m_preemptive(preemptive)
-, m_servoInstructions(servoInstructions)
+, m_spServoInstructions(servoInstructions)
 {
 }
 
 CEvent::CEvent(const CEvent& event)
 : m_eventType(event.m_eventType)
 , m_preemptive(event.m_preemptive)
-, m_servoInstructions(event.m_servoInstructions)
+, m_spServoInstructions(event.m_spServoInstructions)
 {
 
 }
@@ -38,7 +38,7 @@ eEventType CEvent::GetEventType()
     return m_eventType;
 }
 
-std::vector<CServoInstruction> CEvent::GetServoInstructions()
+std::vector<std::shared_ptr<CServoInstruction>> CEvent::GetServoInstructions()
 {
-    return m_servoInstructions;
+    return m_spServoInstructions;
 }

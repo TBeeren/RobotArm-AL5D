@@ -44,7 +44,8 @@ private:
     ros::Subscriber m_calibrateSubscriber;
     ros::Subscriber m_emergencyStopSubcriber;
     ros::Subscriber m_programmedPositionSubcriber;
-    std::queue<CEvent> m_eventQueue;
+    std::queue<CEvent> m_preemptiveEventQueue;
+    std::queue<CEvent> m_queuedEventQueue;
 };
 
 #endif /*CROBOTCONTEXT_H*/

@@ -11,7 +11,7 @@ CStatePublisher::~CStatePublisher()
 {
 }
 
-CStatePublisher CStatePublisher::GetInstance()
+/*static*/ CStatePublisher CStatePublisher::GetInstance()
 {
     static CStatePublisher statePublisher;
     return statePublisher;

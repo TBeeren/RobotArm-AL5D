@@ -18,7 +18,7 @@ public:
     void Exit();
     void HandleEvent(CEvent& rEvent, CRobotContext& rContext);
 private:
-    CEvent& m_rEvent;
+    CEvent m_Event;
     std::shared_ptr<CConfiguration> m_spConfiguration;
 };
 
@@ -33,7 +33,7 @@ public:
     void Exit();
     void HandleEvent(CEvent& rEvent, CRobotContext& rContext);
 private:
-    CEvent& m_rEvent;
+    CEvent m_Event;
     std::shared_ptr<CConfiguration> m_spConfiguration;
 };
 class CMoveState: public IRobotStates
@@ -47,14 +47,14 @@ public:
     void Exit();
     void HandleEvent(CEvent& rEvent, CRobotContext& rContext);
 private:
-    CEvent& m_rEvent;
+    CEvent m_Event;
     std::shared_ptr<CConfiguration> m_spConfiguration;
 };
 
 class CStopState: public IRobotStates
 {
 public:
-    CStopState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration);
+    CStopState();
     ~CStopState();
 
     void Entry();
@@ -62,8 +62,6 @@ public:
     void Exit();
     void HandleEvent(CEvent& rEvent, CRobotContext& rContext);
 private:
-    CEvent& m_rEvent;
-    std::shared_ptr<CConfiguration> m_spConfiguration;
 };
 
 #endif /*CSTATES_H*/

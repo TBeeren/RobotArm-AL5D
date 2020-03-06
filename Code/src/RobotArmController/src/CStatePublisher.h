@@ -27,7 +27,7 @@ class CStatePublisher
 public:
     ~CStatePublisher();
 
-    CStatePublisher GetInstance();
+    static CStatePublisher GetInstance();
     void PublishState(ePublishableStates state);
 
 private:

@@ -33,10 +33,16 @@ void CRobotContext::Run()
 {
     do
     {
-        while(!m_eventQueue.empty())
+        if(!m_preemptiveEventQueue.empty())
         {
-            CEvent event(m_eventQueue.front());
-            m_eventQueue.pop();
+            CEvent event(m_preemptiveEventQueue.front());
+            m_preemptiveEventQueue.pop();
+            m_spCurrentState->HandleEvent(event, *this);
+        }
+        else if(!m_queuedEventQueue.empty())
+        {
+            CEvent event(m_queuedEventQueue.front());
+            m_queuedEventQueue.pop();
             m_spCurrentState->HandleEvent(event, *this);
         }
         ros::spinOnce();
@@ -56,33 +62,65 @@ void CRobotContext::SetState(std::shared_ptr<IRobotStates> sp_state)
 
 void CRobotContext::MoveCallback(const RobotArmController::Move::ConstPtr& moveMsg)
 {
-    std::vector<CServoInstruction> servoInstructions;
-    for(auto instruction : moveMsg->instruction)
+    std::vector<std::shared_ptr<CServoInstruction>> servoInstructions;
+    for(const auto& instruction : moveMsg->instruction)
     {
-        servoInstructions.emplace_back(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed);
+        servoInstructions.emplace_back(std::make_shared<CServoInstruction>(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed));
     }
+
     CEvent event(MOVE, moveMsg->preemptive, servoInstructions);
-    m_eventQueue.push(event);
+    if(event.IsPreemptive())
+    {
+        m_preemptiveEventQueue.push(event);
+    }
+    else
+    {
+        m_queuedEventQueue.push(event);
+    }
+    
 }
 
 void CRobotContext::CalibrateCallback(const RobotArmController::Move::ConstPtr& calibrateMsg)
 {
-    std::vector<CServoInstruction> servoInstructions;
+    std::vector<std::shared_ptr<CServoInstruction>> servoInstructions;
     for(auto instruction : calibrateMsg->instruction)
     {
-        servoInstructions.emplace_back(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed);
+        servoInstructions.emplace_back(std::make_shared<CServoInstruction>(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed));
     }
     CEvent event(MOVE, calibrateMsg->preemptive, servoInstructions);
-    m_eventQueue.push(event);
+    m_queuedEventQueue.push(event);
 }
 
 void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencyStop::ConstPtr& stopMsg)
 {
-    CEvent event(EMERGENCY_STOP);
-    m_eventQueue.push(event);
+    std::shared_ptr<IRobotStates> stopState = std::make_shared<CStopState>();
+    SetState(stopState);
 }
+
+/* twee queues eerst de preemptive queue afhandelen
+queues vullen
+timer voor de gequeuede functies timer is gelijk aan hoogste duration plus timingdiagram tijd */
 
 void CRobotContext::ProgrammedPositionCallback(const RobotArmController::ProgrammedPosition::ConstPtr& programmedPositionMsg)
 {
-
+    switch (m_spConfiguration->StringToProgrammedPosition(programmedPositionMsg->programmedPosition))
+    {
+    case PARK:
+    {
+        std::cout<<"TODO: IMPLEMENT PARK"<<std::endl;
+        break;
+    }
+    case READY:
+    {
+        std::cout<<"TODO: IMPLEMENT READY"<<std::endl;
+        break;
+    }
+    case STRAIGHT:
+    {
+        std::cout<<"TODO: IMPLEMENT STRAIGHT"<<std::endl;
+        break;
+    }
+    default:
+        break;
+    } 
 }
