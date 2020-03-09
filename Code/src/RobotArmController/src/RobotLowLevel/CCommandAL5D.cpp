@@ -12,6 +12,22 @@
 #include "CCommandAL5D.h"
 
 #include "CCommunicate.h"
+#include "../RobotHighLevel/CConfiguration.h"
+
+namespace
+{
+    constexpr const int16_t MINIMAL_DEGREES_BASE = -90;
+    constexpr const int16_t MINIMAL_DEGREES_SHOULDER = -30;
+    constexpr const int16_t MINIMAL_DEGREES_ELBOW = 0;
+    constexpr const int16_t MINIMAL_DEGREES_WRIST = -90;
+    constexpr const int16_t MINIMAL_DEGREES_WRIST_ROTATE = -90;
+
+    constexpr const int16_t MAXIMAL_DEGREES_BASE = 90;
+    constexpr const int16_t MAXIMAL_DEGREES_SHOULDER = 90;
+    constexpr const int16_t MAXIMAL_DEGREES_ELBOW = 135;
+    constexpr const int16_t MAXIMAL_DEGREES_WRIST = 90;
+    constexpr const int16_t MAXIMAL_DEGREES_WRIST_ROTATE = -90;
+}
 
 CCommandAL5D::CCommandAL5D()
 : m_spCommunicate(std::make_shared<CCommunicate>())
@@ -28,6 +44,13 @@ CCommandAL5D::~CCommandAL5D()
 void CCommandAL5D::Write(const std::string& rMessage)
 {
     m_spCommunicate->WriteSerial(rMessage);
+}
+
+void CCommandAL5D::ClearLists()
+{
+    std::fill(m_positionArray.begin(), m_positionArray.end(), 0);
+    std::fill(m_durationArray.begin(), m_durationArray.end(), 0);
+    std::fill(m_speedArray.begin(), m_speedArray.end(), 0);
 }
 
 void CCommandAL5D::AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration)
@@ -58,6 +81,47 @@ void CCommandAL5D::AppendInstruction(eCommand eCommand, uint64_t position, uint6
     }
 }
 
+bool IsHardwareCompatible(eServos servo, uint64_t position)
+{
+    bool success = false;
+
+    switch (servo)
+    {
+        case eServos::BASE:
+        {
+            success = (position >= MINIMAL_DEGREES_BASE && position <= MAXIMAL_DEGREES_BASE);
+            break;
+        }
+        case eServos::SHOULDER:
+        {
+            success = (position >= MINIMAL_DEGREES_SHOULDER && position <= MAXIMAL_DEGREES_SHOULDER);
+            break;
+        }
+        case eServos::ELBOW:
+        {
+            success = (position >= MINIMAL_DEGREES_ELBOW && position <= MAXIMAL_DEGREES_ELBOW);
+            break;
+        }
+        case eServos::WRIST:
+        {
+            success = (position >= MINIMAL_DEGREES_WRIST && position <= MAXIMAL_DEGREES_WRIST);
+            break;
+        }
+        case eServos::WRIST_ROTATE:
+        {
+            success = (position >= MINIMAL_DEGREES_WRIST_ROTATE && position <= MAXIMAL_DEGREES_WRIST_ROTATE);
+            break;
+        }
+        default:
+        {
+            throw "Servo is unknown! Please check your message on syntax";
+            break;
+        }
+    }
+    
+    return success;
+}
+
 // Servo ID: #5 
 // Position: P1600 
 // Time    : T2500 
@@ -69,6 +133,11 @@ std::string CCommandAL5D::CreateMessage()
     for(int i = 0; i < m_positionArray.size(); ++i)
     {
         returnMessage += "#" + i;
+
+        if(!IsHardwareCompatible(eServos(i), m_positionArray[i]))
+        {
+            break;
+        }
 
         if(m_positionArray[i] != -1)
         {

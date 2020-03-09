@@ -31,6 +31,7 @@ public:
     virtual void Stop() = 0;
     virtual void Write(const std::string& rMessage) = 0;
     virtual void AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration) = 0;
+    virtual void ClearLists() = 0;
 
 private:
 

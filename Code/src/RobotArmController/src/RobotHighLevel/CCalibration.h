@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "CConfiguration.h"
+#include "../RobotLowLevel/IExecuteCommand.h"
 
 // Forward Declaration
 class CServoInstruction;
