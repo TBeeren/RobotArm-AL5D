@@ -8,6 +8,8 @@ SET(SOURCES
 	CCalibration.cpp
 	CConfiguration.cpp
 	CMove.cpp
+	CCalibration.cpp
+	CConfiguration.cpp
 )
 
 add_library(RobotHighLevel ${SOURCES})
