@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-#include "CConfiguration.h"
-
-CConfiguration::CConfiguration(/* args */)
-{
-    programmedPositions =
-    {
-        {eProgrammedPosition::PARK, "PARK"},
-        {eProgrammedPosition::READY, "READY"},
-        {eProgrammedPosition::STRAIGHT, "STRAIGHT"}
-=======
 /**
  * @file CConfiguration.cpp
  * @author Tim Beeren (T.Beeren1@student.han.nl)
@@ -60,7 +49,6 @@ CConfiguration::CConfiguration(std::shared_ptr<CConfiguration> spConfiguration)
         {eServos::WRIST , m_wristConfig},
         {eServos::GRIPPER , m_gripperConfig},
         {eServos::WRIST_ROTATE , m_wristRotateConfig}
->>>>>>> d0600a4d803aa1bafc6c67124fa9c1a123afe533
     };
 }
 
@@ -68,18 +56,6 @@ CConfiguration::~CConfiguration()
 {
 }
 
-<<<<<<< HEAD
-eProgrammedPosition CConfiguration::StringToProgrammedPosition(std::string programmedPositionString)
-{
-    for(auto programmedPosition : programmedPositions)
-    {
-        if(programmedPosition.second == programmedPositionString)
-        {
-            return programmedPosition.first;
-        }
-    }
-}
-=======
 
 void CConfiguration::Write(eServos eServo, uint16_t minValue, uint16_t maxValue)
 {
@@ -133,4 +109,3 @@ void CConfiguration::Write(eServos eServo, uint16_t minValue, uint16_t maxValue)
     }
 }
      
->>>>>>> d0600a4d803aa1bafc6c67124fa9c1a123afe533

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-#ifndef CCONFIGURATION_H
-#define CCONFIGURATION_H
-
-#include <map>
-=======
 /**
  * @file CConfiguration.h
  * @author Tim Beeren (T.Beeren1@student.han.nl)
@@ -25,7 +19,6 @@
 
 // Forward Declaration
 class CConfiguration;
->>>>>>> d0600a4d803aa1bafc6c67124fa9c1a123afe533
 
 // Enum Declaration
 enum eServos 
@@ -36,32 +29,6 @@ enum eServos
     WRIST = 3,
     GRIPPER = 4,
     WRIST_ROTATE = 5,
-<<<<<<< HEAD
-    UNKNOWN = 6
-};
-
-enum eProgrammedPosition
-{
-    PARK,
-    READY,
-    STRAIGHT
-};
-
-
-class CConfiguration
-{
-public:
-    CConfiguration(/* args */);
-    ~CConfiguration();
-
-    eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
-private:
-    std::map<eProgrammedPosition, std::string> programmedPositions;
-    /* data */
-};
-
-#endif /*CONFIGURATION_H*/
-=======
     UNKNOWN_SERVO = 6
 };
 
@@ -91,4 +58,3 @@ private:
 };
 
 #endif /*CCONFIGURATION_H*/
->>>>>>> d0600a4d803aa1bafc6c67124fa9c1a123afe533
