@@ -52,6 +52,10 @@ add_message_files(
 	msg	
 	FILES
 	State.msg
+	Move.msg
+	ServoCommand.msg
+	EmergencyStop.msg
+	ProgrammedPosition.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -230,3 +234,7 @@ SET(HEADERS
 add_executable(RobotArmController ${SOURCES} ${HEADERS})
 target_link_libraries(RobotArmController ${catkin_LIBRARIES} RobotHighLevel RobotLowLevel)
 add_dependencies(RobotArmController RobotArmController_generate_messages_cpp)
+
+add_executable(MotionController src/MotionController.cpp)
+target_link_libraries(MotionController ${catkin_LIBRARIES})
+add_dependencies(MotionController RobotArmController_generate_messages_cpp)
