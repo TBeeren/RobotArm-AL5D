@@ -1,5 +1,8 @@
+#include "CRobotContext.h"
+
 int main(int argc, char const *argv[])
 {
-    /* code */
+    CRobotContext context;
+    context.Run();
     return 0;
 }

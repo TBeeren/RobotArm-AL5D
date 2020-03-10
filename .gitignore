@@ -9,6 +9,10 @@ devel/
 # Useless files
 *.catkin_workspace
 
+#catkin generated files
+catkin_generated/
+atomic_configure
+
 # CMake files
 CMakeLists.txt.user
 CMakeCache.txt

@@ -4,14 +4,19 @@
 #include "RobotHighLevel/CConfiguration.h"
 #include "RobotArmController/ServoCommand.h"
 
+namespace
+{
+    constexpr const std::chrono::duration<double> WORST_CASE_LATENCY_MILLIS = std::chrono::milliseconds(2300);
+}
+
 CRobotContext::CRobotContext()
 : m_spCurrentState(nullptr)
 , m_spConfiguration(std::make_shared<CConfiguration>())
 , m_nodeHandle()
-, m_moveSubcriber(m_nodeHandle.subscribe("\\RobotArmController\\Move",1000, &CRobotContext::MoveCallback, this))
-, m_calibrateSubscriber(m_nodeHandle.subscribe("\\RobotArmController\\Calibrate",1000, &CRobotContext::CalibrateCallback, this))
-, m_emergencyStopSubcriber(m_nodeHandle.subscribe("\\RobotArmController\\EmergencyStop", 1000, &CRobotContext::EmergencyStopCallback, this))
-, m_programmedPositionSubcriber(m_nodeHandle.subscribe("\\RobotArmController\\ProgrammedPosition", 1000, &CRobotContext::ProgrammedPositionCallback, this))
+, m_moveSubcriber(m_nodeHandle.subscribe("/RobotArmController/Move",1000, &CRobotContext::MoveCallback, this))
+, m_calibrateSubscriber(m_nodeHandle.subscribe("/RobotArmController/Calibrate",1000, &CRobotContext::CalibrateCallback, this))
+, m_emergencyStopSubcriber(m_nodeHandle.subscribe("/RobotArmController/EmergencyStop", 1000, &CRobotContext::EmergencyStopCallback, this))
+, m_programmedPositionSubcriber(m_nodeHandle.subscribe("/RobotArmController/ProgrammedPosition", 1000, &CRobotContext::ProgrammedPositionCallback, this))
 {
     CEvent event(IDLE);
     std::shared_ptr<IRobotStates> spStartState = std::make_shared<CIdleState>(event, m_spConfiguration);
@@ -22,26 +27,24 @@ CRobotContext::~CRobotContext()
 {
 }
 
-void CRobotContext::Init()
-{
-    CEvent event(IDLE);
-    std::shared_ptr<IRobotStates> spStartState = std::make_shared<CIdleState>(event, m_spConfiguration);
-    SetState(spStartState);
-}
-
 void CRobotContext::Run()
 {
+    auto currentTime = std::chrono::system_clock::now();
+    auto deadline = currentTime + WORST_CASE_LATENCY_MILLIS;    
+
     do
     {
         if(!m_preemptiveEventQueue.empty())
         {
             CEvent event(m_preemptiveEventQueue.front());
+            deadline = std::chrono::system_clock::now() + WORST_CASE_LATENCY_MILLIS + GetHighestDuration(event);
             m_preemptiveEventQueue.pop();
             m_spCurrentState->HandleEvent(event, *this);
         }
-        else if(!m_queuedEventQueue.empty())
+        else if(!m_queuedEventQueue.empty() && deadline <= std::chrono::system_clock::now())
         {
             CEvent event(m_queuedEventQueue.front());
+            deadline = std::chrono::system_clock::now() + WORST_CASE_LATENCY_MILLIS + GetHighestDuration(event);
             m_queuedEventQueue.pop();
             m_spCurrentState->HandleEvent(event, *this);
         }
@@ -97,10 +100,6 @@ void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencySto
     SetState(stopState);
 }
 
-/* twee queues eerst de preemptive queue afhandelen
-queues vullen
-timer voor de gequeuede functies timer is gelijk aan hoogste duration plus timingdiagram tijd */
-
 void CRobotContext::ProgrammedPositionCallback(const RobotArmController::ProgrammedPosition::ConstPtr& programmedPositionMsg)
 {
     switch (m_spConfiguration->StringToProgrammedPosition(programmedPositionMsg->programmedPosition))
@@ -123,4 +122,17 @@ void CRobotContext::ProgrammedPositionCallback(const RobotArmController::Program
     default:
         break;
     } 
+}
+
+std::chrono::duration<double> CRobotContext::GetHighestDuration(CEvent& rEvent)
+{
+    uint64_t highestDuration = 0;
+    for(std::shared_ptr<CServoInstruction> instruction : rEvent.GetServoInstructions())
+    {
+        if(instruction->GetDuration() >  highestDuration)
+        {
+            highestDuration = instruction->GetDuration();
+        }
+    }
+    return std::chrono::milliseconds(highestDuration);
 }

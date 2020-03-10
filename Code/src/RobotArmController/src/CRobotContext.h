@@ -15,6 +15,7 @@
 #include <ros/ros.h>
 #include <memory>
 #include <queue>
+#include <chrono>
 #include "CEvent.h"
 #include "RobotArmController/Move.h"
 #include "RobotArmController/EmergencyStop.h"
@@ -29,7 +30,6 @@ public:
     CRobotContext();
     ~CRobotContext();
 
-    void Init();
     void Run();
     void SetState(std::shared_ptr<IRobotStates> sp_state);
     void MoveCallback(const RobotArmController::Move::ConstPtr& moveMsg);
@@ -37,6 +37,8 @@ public:
     void EmergencyStopCallback(const RobotArmController::EmergencyStop::ConstPtr& stopMsg);
     void ProgrammedPositionCallback(const RobotArmController::ProgrammedPosition::ConstPtr& programmedPositionMsg);
 private:
+    std::chrono::duration<double> GetHighestDuration(CEvent& rEvent);
+
     std::shared_ptr<IRobotStates> m_spCurrentState;
     std::shared_ptr<CConfiguration> m_spConfiguration;
     ros::NodeHandle m_nodeHandle;
