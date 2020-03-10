@@ -28,7 +28,7 @@ valign=top
     </coordinates>
     <panel_attributes>CALIBRATION
 --
-Entry: ClearValues();
+Entry:
 Do: CalibrateServos()
 Exit: -
 Defer: evMove
