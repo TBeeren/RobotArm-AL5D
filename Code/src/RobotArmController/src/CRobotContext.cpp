@@ -6,7 +6,7 @@
 
 namespace
 {
-    constexpr const std::chrono::duration<double> WORST_CASE_LATENCY_MILLIS = std::chrono::milliseconds(2300);
+    constexpr const std::chrono::duration<double> WORST_CASE_LATENCY_MILLIS = std::chrono::milliseconds(500);
 }
 
 CRobotContext::CRobotContext()

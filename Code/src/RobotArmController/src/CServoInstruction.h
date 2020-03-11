@@ -1,3 +1,13 @@
+/**
+ * @file CServoInstruction.h
+ * @author Evren Kilic (ET.Kilic@student.han.nl)
+ * @brief CServoinstruction is a class that holds the instructions for a specfic servo within the robotarm.
+ * @version 0.1
+ * @date 11-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef CSERVOINSTRUCTION_H
 #define CSERVOINSTRUCTION_H
 

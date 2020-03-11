@@ -1,7 +1,7 @@
 /**
  * @file CStatePublisher.h
  * @author Evren Kilic (ET.Kilic@student.han.nl)
- * @brief 
+ * @brief CStatePublisher is a singleton class that can be used to publish a state on the /RobotArmController/State ros topic
  * @version 0.1
  * @date 05-03-2020
  * 
@@ -14,6 +14,10 @@
 
 #include <ros/ros.h>
 
+/**
+ * @brief The enum of states that the state publisher can publish
+ * 
+ */
 enum ePublishableStates
 {
     PUBLISH_IDLE,
@@ -27,10 +31,24 @@ class CStatePublisher
 public:
     ~CStatePublisher();
 
+    /**
+     * @brief Returns the single instance of the CStatePublisher class
+     * 
+     * @return CStatePublisher* A pointer to the singleton statepublisher
+     */
     static CStatePublisher* GetInstance();
+    /**
+     * @brief Publishes the state on the /RobotArmController/State ros topic
+     * 
+     * @param state the state to publish on the before mentioned ros topic
+     */
     void PublishState(ePublishableStates state);
 
 private:
+    /**
+     * @brief Private constructior for the state publisher as it is a singleton.
+     * 
+     */
     CStatePublisher();
     static CStatePublisher* m_pInstance;
     ros::NodeHandle m_nodeHandle;
