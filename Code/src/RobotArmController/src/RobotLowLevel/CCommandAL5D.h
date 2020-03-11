@@ -25,7 +25,7 @@ class CCommunicate;
 namespace
 {
     constexpr const uint8_t INSTRUCTION_ARRAY_SIZE = 5;
-    constexpr const char* STOP_MESSAGE = "XSTOP";
+    constexpr const char* STOP_MESSAGE = "STOP";
 }
 
 class CCommandAL5D : public IExecuteCommand

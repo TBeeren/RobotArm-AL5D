@@ -23,10 +23,8 @@ public:
     uint16_t CalibrationDegreesToPwm(int16_t degrees);
 
 private:
-
     std::shared_ptr<CConfiguration> m_spConfiguration;
     std::shared_ptr<IExecuteCommand> m_spExecuteCommand;
-
 };
 
 #endif /*CMOVE_H*/

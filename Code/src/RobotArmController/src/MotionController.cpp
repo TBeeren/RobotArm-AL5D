@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     //Calibration
     std::cout << "Calibrate using wasd and enter, type done when completed" << std::endl;
     int calibratingServo = 0;
-    std::vector<int> calibrationValues = {0,0,-10,60,40,70};
+    std::vector<int> calibrationValues = {0, 0, -10, 60, 40, 70};
     while (ros::ok())
     {
         std::cin >> input;
@@ -69,6 +69,10 @@ int main(int argc, char *argv[])
         }
         ros::spinOnce();
     }
+    
+    RobotArmController::ProgrammedPosition posMsg;
+    posMsg.programmedPosition = "park";
+    programmedPositionPublisher.publish(posMsg);
     //End of Calibration
 
     while (ros::ok())
@@ -81,9 +85,6 @@ int main(int argc, char *argv[])
         else
         {
             std::cout << "Input: " << input << std::endl;
-            //Emergency Stop
-
-            //ProgrammedPositions
 
             //Controlling Servos
             size_t instructionAmount = std::count(input.begin(), input.end(), '#');
@@ -118,7 +119,7 @@ int main(int argc, char *argv[])
 
                     std::string servoString = "";
                     std::string positionString = "";
-                    std::string durationString = ""; 
+                    std::string durationString = "";
                     std::string speedString = "";
 
                     for (int i = servoStart + 1; isdigit(command[i]); ++i)
@@ -138,19 +139,19 @@ int main(int argc, char *argv[])
                         durationString += command[i];
                     }
 
-                    if(servoString == "")
+                    if (servoString == "")
                     {
                         servoString = "-1";
                     }
-                    if(positionString == "")
+                    if (positionString == "")
                     {
                         positionString = "-1";
                     }
-                    if(durationString == "")
+                    if (durationString == "")
                     {
                         durationString = "-1";
                     }
-                    if(speedString == "")
+                    if (speedString == "")
                     {
                         speedString = "-1";
                     }
@@ -168,13 +169,13 @@ int main(int argc, char *argv[])
             }
             else
             {
-                if(input == "straight")
+                if (input == "straight")
                 {
                     RobotArmController::ProgrammedPosition posMsg;
                     posMsg.programmedPosition = "straight";
                     programmedPositionPublisher.publish(posMsg);
                 }
-                else if(input == "park")
+                else if (input == "park")
                 {
                     RobotArmController::ProgrammedPosition posMsg;
                     posMsg.programmedPosition = "park";
@@ -192,7 +193,6 @@ int main(int argc, char *argv[])
                     stopPublisher.publish(stopMsg);
                 }
             }
-            
         }
         ros::spinOnce();
     }

@@ -61,7 +61,6 @@ public:
     void Write(eServos eServo, uint16_t value);
     uint16_t GetMinPWM(eServos eServo);
     uint16_t GetMaxPWM(eServos eServo);
-
     eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
 
 private:
