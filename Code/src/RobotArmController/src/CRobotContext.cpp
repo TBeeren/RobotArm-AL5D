@@ -110,21 +110,45 @@ void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencySto
 
 void CRobotContext::ProgrammedPositionCallback(const RobotArmController::ProgrammedPosition::ConstPtr& programmedPositionMsg)
 {
+
+    std::cout<< programmedPositionMsg->programmedPosition <<std::endl;
     switch (m_spConfiguration->StringToProgrammedPosition(programmedPositionMsg->programmedPosition))
     {
     case PARK:
     {
-        std::cout<<"TODO: IMPLEMENT PARK"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 80, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), 90, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), -40, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 500, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     case READY:
     {
-        std::cout<<"TODO: IMPLEMENT READY"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 50, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), 40, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 500, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     case STRAIGHT:
     {
-        std::cout<<"TODO: IMPLEMENT STRAIGHT"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 20, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), -70, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(4), 0, 500, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 500, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     default:

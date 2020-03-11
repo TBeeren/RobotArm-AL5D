@@ -31,7 +31,7 @@ public:
     void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions);
 
 private:
-    bool WriteConfig(eServos eServo, uint16_t minValue, uint16_t maxValue);
+    bool WriteConfig(eServos eServo, uint16_t value);
     std::shared_ptr<CConfiguration> m_spConfiguration;
     std::shared_ptr<CMove> m_spMove;
     

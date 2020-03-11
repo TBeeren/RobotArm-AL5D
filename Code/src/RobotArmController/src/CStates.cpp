@@ -85,7 +85,7 @@ void CCalibrateState::Do()
 {
     std::cout << __PRETTY_FUNCTION__ << std::endl;
     CCalibration calibration(m_spConfiguration);
-    calibration.Execute(eCommand::MOVE_COMMAND, m_Event.GetServoInstructions());
+    calibration.Execute(eCommand::CALIBRATE_COMMAND, m_Event.GetServoInstructions());
 }
 void CCalibrateState::Exit()
 {

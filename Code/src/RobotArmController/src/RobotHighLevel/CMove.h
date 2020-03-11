@@ -17,10 +17,12 @@ public:
     ~CMove();
 
     void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions);
+    void ExecuteCalibrate(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions);
     bool IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruction);
+    uint16_t DegreesToPWM(eServos servo, int16_t degrees);
+    uint16_t CalibrationDegreesToPwm(int16_t degrees);
 
 private:
-    uint16_t DegreesToPWM(eServos servo, int16_t degrees);
 
     std::shared_ptr<CConfiguration> m_spConfiguration;
     std::shared_ptr<IExecuteCommand> m_spExecuteCommand;

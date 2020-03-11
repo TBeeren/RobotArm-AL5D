@@ -58,7 +58,9 @@ public:
 
     // Methods
     void ExecuteMovement();
-    void Write(eServos eServo, uint16_t minValue, uint16_t maxValue);
+    void Write(eServos eServo, uint16_t value);
+    uint16_t GetMinPWM(eServos eServo);
+    uint16_t GetMaxPWM(eServos eServo);
 
     eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
 

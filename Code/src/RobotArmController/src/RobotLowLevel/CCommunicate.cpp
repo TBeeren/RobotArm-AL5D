@@ -44,7 +44,7 @@ bool CCommunicate::Close()
 
 bool CCommunicate::WriteSerial(const std::string& rMessage)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << rMessage << std::endl;
 	for (const char& s: rMessage)
 	{
 	    boost::asio::streambuf b;

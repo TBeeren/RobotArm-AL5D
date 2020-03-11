@@ -19,8 +19,9 @@
 enum eCommand 
 {
     MOVE_COMMAND = 0,
-    STOP_COMMAND = 1,
-    UNKNOWN_COMMAND = 2
+    CALIBRATE_COMMAND = 1,
+    STOP_COMMAND = 2,
+    UNKNOWN_COMMAND = 3
 };
 
 class IExecuteCommand

@@ -66,6 +66,14 @@ void CCommandAL5D::AppendInstruction(eCommand eCommand, int8_t servo ,int64_t po
             m_durations.push_back(duration);
             break;
         }
+        case eCommand::CALIBRATE_COMMAND:
+        {
+            m_targets.push_back(servo);
+            m_positions.push_back(position);
+            m_speeds.push_back(speed);
+            m_durations.push_back(duration);
+            break;
+        }
         case eCommand::STOP_COMMAND:
         {
             Stop();
@@ -78,6 +86,7 @@ void CCommandAL5D::AppendInstruction(eCommand eCommand, int8_t servo ,int64_t po
         }
         default:
         {
+            std::cout<< "Command is unknown! Please check your message on syntax" << std::endl;
             break;
         }
     }
@@ -114,6 +123,11 @@ bool CCommandAL5D::IsHardwareCompatible(eServos servo, int64_t position)
             success = (position >= MINIMAL_DEGREES_WRIST_ROTATE && position <= MAXIMAL_DEGREES_WRIST_ROTATE);
             break;
         }
+        case eServos::GRIPPER:
+        {
+            success = (position >= MINIMAL_DEGREES_WRIST_ROTATE && position <= MAXIMAL_DEGREES_WRIST_ROTATE);
+            break;
+        }
         default:
         {
             std::cout<< "Servo is unknown! Please check your message on syntax" << std::endl;
@@ -131,6 +145,15 @@ bool CCommandAL5D::IsHardwareCompatible(eServos servo, int64_t position)
 std::string CCommandAL5D::CreateMessage()
 {
     std::string returnMessage = "";
+
+    for(uint16_t i = 0; i < m_targets.size(); ++i)
+    {
+        std::cout << "Creating a message!" << std::endl;
+        std::cout << "Target Servo: " << m_targets.at(i) << std::endl;
+        std::cout << "Position: "  << m_positions.at(i) << std::endl;
+        std::cout << "Duration: :" << m_durations.at(i) << std::endl;
+        std::cout << "Position: "  << m_speeds.at(i) << std::endl;
+    }
 
     for(uint16_t i = 0; i < m_targets.size(); ++i)
     {
@@ -163,7 +186,7 @@ std::string CCommandAL5D::CreateMessage()
     }
     char cr = 13;
     returnMessage += cr;
-
+    
     if(returnMessage.size() < 4)
     {
         std::cout<< "[Error]: Created message doesn't suite the protocol."<<std::endl;
@@ -179,7 +202,7 @@ void CCommandAL5D::Execute()
 {
     // Assert if the instruction arrays aren't equal and bigger then 0. 
     assert(m_targets.size() != 0);
-    assert(m_positions.size() == m_speeds.size() == m_durations.size());
+    std::cout << "pos " << m_positions.size()<< "speeds "<< m_speeds.size()<< "durations " << m_durations.size()<<std::endl;
 
     // Write Serial with the converted string.
     m_spCommunicate->WriteSerial(CreateMessage());
