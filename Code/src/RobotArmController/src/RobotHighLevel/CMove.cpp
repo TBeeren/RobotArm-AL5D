@@ -27,8 +27,9 @@ namespace
     constexpr const uint8_t MAXIMAL_DEGREES_WRIST_ROTATE = 180;
 }
 
-CMove::CMove()
-: m_spExecuteCommand(std::make_shared<CCommandAL5D>())
+CMove::CMove(std::shared_ptr<CConfiguration> spConfiguration)
+: m_spConfiguration(spConfiguration)
+, m_spExecuteCommand(std::make_shared<CCommandAL5D>())
 {
 }
 
@@ -63,6 +64,11 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
             PWM = ((static_cast<uint16_t>(MAXIMAL_PULSE_WIDTH) / MAXIMAL_DEGREES_WRIST) * degrees);
             break;
         }
+        case eServos::GRIPPER:
+        {
+            PWM = ((static_cast<uint16_t>(MAXIMAL_PULSE_WIDTH) / MAXIMAL_DEGREES_WRIST) * degrees);
+            break;
+        }
         case eServos::WRIST_ROTATE:
         {
             PWM = ((static_cast<uint16_t>(MAXIMAL_PULSE_WIDTH) / MAXIMAL_DEGREES_WRIST_ROTATE) * degrees);
@@ -70,7 +76,7 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
         }
         default:
         {
-            throw "Servo is unknown! Please check your message on syntax";
+            std::cout<< "Servo is unknown! Please check your message on syntax" << std::endl;
             break;
         }
     }
@@ -80,6 +86,7 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
 
 bool CMove::IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruction)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     if(rServoInstruction->GetTargetServo() >= eServos::UNKNOWN_SERVO)
     {
         return false;
@@ -88,10 +95,12 @@ bool CMove::IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruct
     {
         return false;
     }
+    return true;
 }
 
 void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     assert(rServoInstructions.size() != 0);
 
     for(const auto& rInstruction : rServoInstructions)
@@ -99,15 +108,18 @@ void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruc
         m_spExecuteCommand->AppendInstruction(
             eCommand, 
             rInstruction->GetTargetServo(), 
+            DegreesToPWM(rInstruction->GetTargetServo(), rInstruction->GetPosition()),
             rInstruction->GetSpeed(), 
-            DegreesToPWM(rInstruction->GetTargetServo(), rInstruction->GetDuration())
+            rInstruction->GetDuration()
         );
 
         if(!IsInstructionValid(rInstruction))
         {
             m_spExecuteCommand->ClearLists();
-            throw "Wrong Instruction! Please provide valid syntax";
+            //throw "Wrong Instruction! Please provide valid syntax";
             break; 
         }
     }
+
+    m_spExecuteCommand->Execute();
 }

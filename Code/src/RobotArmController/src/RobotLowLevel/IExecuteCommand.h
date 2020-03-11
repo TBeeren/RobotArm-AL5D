@@ -13,6 +13,7 @@
 #define IEXECUTECOMMAND_H
 
 #include <iostream>
+#include <vector>
 
 // Enum Declaration
 enum eCommand 
@@ -25,12 +26,13 @@ enum eCommand
 class IExecuteCommand
 {
 public:
-    IExecuteCommand();
-    ~IExecuteCommand();
+    IExecuteCommand() = default;
+    virtual ~IExecuteCommand() = default;
 
     virtual void Stop() = 0;
     virtual void Write(const std::string& rMessage) = 0;
-    virtual void AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration) = 0;
+    virtual void AppendInstruction(eCommand eCommand, int8_t servo , int64_t position, int64_t speed, int64_t duration) = 0;
+    virtual void Execute() = 0;
     virtual void ClearLists() = 0;
 
 private:

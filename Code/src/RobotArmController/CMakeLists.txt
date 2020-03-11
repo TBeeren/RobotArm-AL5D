@@ -234,6 +234,7 @@ SET(HEADERS
 add_executable(RobotArmController ${SOURCES} ${HEADERS})
 target_link_libraries(RobotArmController ${catkin_LIBRARIES} RobotHighLevel RobotLowLevel)
 add_dependencies(RobotArmController RobotArmController_generate_messages_cpp)
+target_compile_options(RobotArmController PRIVATE -Wall -Wextra)
 
 add_executable(MotionController src/MotionController.cpp)
 target_link_libraries(MotionController ${catkin_LIBRARIES})

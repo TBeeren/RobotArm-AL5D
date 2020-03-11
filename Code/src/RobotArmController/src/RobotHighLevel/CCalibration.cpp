@@ -15,9 +15,12 @@
 #include "CMove.h"
 
 CCalibration::CCalibration(std::shared_ptr<CConfiguration> spConfiguration)
-: m_spConfiguration(spConfiguration)
-, m_spMove(std::make_shared<CMove>())
+// : m_spConfiguration(spConfiguration)
+// , m_spMove(std::make_shared<CMove>(spConfiguration))
 {
+    m_spConfiguration = spConfiguration;
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    m_spMove = std::make_shared<CMove>(spConfiguration);
 }
 
 CCalibration::~CCalibration()
@@ -26,10 +29,12 @@ CCalibration::~CCalibration()
 
 void CCalibration::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
 {   
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     m_spMove->Execute(eCommand, rServoIntructions);
 }
     
 bool CCalibration::WriteConfig(eServos eServo, uint16_t minValue, uint16_t maxValue)
 {
     m_spConfiguration->Write(eServo, minValue, maxValue);
+    return true;
 }

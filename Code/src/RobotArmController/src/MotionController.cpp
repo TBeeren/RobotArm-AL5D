@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-    /* after calibrate the protocol == #2P2000D500S400 */
+    /* after calibrate the protocol == queue#1P2000S300D400!#5P600S670D890! */
     ros::init(argc, argv, "MotionController");
     ros::NodeHandle node;
     ros::Publisher calibratePublisher = node.advertise<RobotArmController::Move>("/RobotArmController/Calibrate", 1000);
@@ -26,14 +26,14 @@ int main(int argc, char *argv[])
     //Calibration
     std::cout << "Calibrate using wasd and enter, type done when completed" << std::endl;
     int calibratingServo = 0;
-    std::vector<int> calibrationValues(5, 100);
+    std::vector<int> calibrationValues(6, 50);
     while (ros::ok())
     {
         std::cin >> input;
         std::cout << "Input is: " << input << std::endl;
         if (input == "w")
         {
-            calibrationValues.at(calibratingServo) += 10;
+            calibrationValues.at(calibratingServo) += 5;
         }
         if (input == "a")
         {
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         }
         if (input == "s")
         {
-            calibrationValues.at(calibratingServo) -= 10;
+            calibrationValues.at(calibratingServo) -= 5;
         }
         if (input == "d")
         {
@@ -60,11 +60,11 @@ int main(int argc, char *argv[])
             RobotArmController::Move calibrationMsg;
             servoCommand.targetServo = calibratingServo;
             servoCommand.position = calibrationValues.at(calibratingServo);
-            servoCommand.speed = 0;
-            servoCommand.duration = 0;
+            servoCommand.speed = -1;
+            servoCommand.duration = -1;
             servoCommands.push_back(servoCommand);
             calibrationMsg.instruction = servoCommands;
-            calibrationMsg.preemptive = false;
+            calibrationMsg.preemptive = true;
             calibratePublisher.publish(calibrationMsg);
         }
         ros::spinOnce();
@@ -93,7 +93,6 @@ int main(int argc, char *argv[])
 
                 std::size_t commandStart = 0;
                 std::string command = "";
-                //queue#1P2000S300D400!#5P600S670D890!
 
                 //Create the message
                 RobotArmController::Move moveMsg;

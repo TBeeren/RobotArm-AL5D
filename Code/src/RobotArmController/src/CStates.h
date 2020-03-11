@@ -54,14 +54,17 @@ private:
 class CStopState: public IRobotStates
 {
 public:
-    CStopState();
+    CStopState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration);
     ~CStopState();
 
     void Entry();
     void Do();
     void Exit();
     void HandleEvent(CEvent& rEvent, CRobotContext& rContext);
+
 private:
+    CEvent m_Event;
+    std::shared_ptr<CConfiguration> m_spConfiguration;
 };
 
 #endif /*CSTATES_H*/

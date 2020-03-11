@@ -9,7 +9,12 @@ SET(SOURCES
 	CCommunicate.cpp
 )
 
-add_library(RobotLowLevel ${SOURCES})
+SET(HEADERS
+	IExecuteCommand.h
+)
+
+add_library(RobotLowLevel ${SOURCES} ${HEADERS})
+target_compile_options(RobotLowLevel PRIVATE -Wall -Wextra)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

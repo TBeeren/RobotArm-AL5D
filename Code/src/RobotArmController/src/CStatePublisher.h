@@ -27,11 +27,12 @@ class CStatePublisher
 public:
     ~CStatePublisher();
 
-    static CStatePublisher GetInstance();
+    static CStatePublisher* GetInstance();
     void PublishState(ePublishableStates state);
 
 private:
     CStatePublisher();
+    static CStatePublisher* m_pInstance;
     ros::NodeHandle m_nodeHandle;
     ros::Publisher m_publisher;
 };

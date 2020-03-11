@@ -13,13 +13,14 @@
 #include <iostream>
 
 CCommunicate::CCommunicate()
-: m_serialName("/dev/ttyACM0")
+: m_serialName("/dev/ttyUSB0")
 , m_serialPort(m_ioService, m_serialName)
 {
 }
 
 CCommunicate::~CCommunicate()
 {
+	Close();
 }
 
 bool CCommunicate::Init()
@@ -33,22 +34,26 @@ bool CCommunicate::Init()
     return m_serialPort.is_open();
 }
 
+bool CCommunicate::Close()
+{
+	if(m_serialPort.is_open())
+	{
+		m_serialPort.close();
+	}
+}
+
 bool CCommunicate::WriteSerial(const std::string& rMessage)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
 	for (const char& s: rMessage)
 	{
 	    boost::asio::streambuf b;
 	    std::ostream os(&b);
-	    os << s << "\r";
+	    os << s;
         
 	    boost::asio::write(m_serialPort, b.data());
 	    os.flush();
     }
-
-    if (m_serialPort.is_open()) 
-    {
-		m_serialPort.close();
-	}
 
     return true;
 }

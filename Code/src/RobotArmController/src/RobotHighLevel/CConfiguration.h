@@ -32,10 +32,17 @@ enum eServos
     UNKNOWN_SERVO = 6
 };
 
+enum eProgrammedPosition
+{
+    PARK,
+    READY,
+    STRAIGHT
+};
+
 class CConfiguration
 {
 public:
-    CConfiguration(std::shared_ptr<CConfiguration> spConfiguration);
+    CConfiguration();
     ~CConfiguration();
 
     // Default configuration
@@ -52,9 +59,11 @@ public:
     // Methods
     void ExecuteMovement();
     void Write(eServos eServo, uint16_t minValue, uint16_t maxValue);
-    
+
+    eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
+
 private:
-    std::shared_ptr<CConfiguration> m_spConfiguration;
+    std::map<eProgrammedPosition, std::string> programmedPositions;
 };
 
 #endif /*CCONFIGURATION_H*/

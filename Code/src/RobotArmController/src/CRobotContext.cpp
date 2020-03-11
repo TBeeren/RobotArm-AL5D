@@ -49,12 +49,12 @@ void CRobotContext::Run()
             m_spCurrentState->HandleEvent(event, *this);
         }
         ros::spinOnce();
-    }while(ros::ok);
+    }while(ros::ok());
 }
 
 void CRobotContext::SetState(std::shared_ptr<IRobotStates> sp_state)
 {
-    if(!m_spCurrentState)
+    if(m_spCurrentState != nullptr)
     {
         m_spCurrentState->Exit();
     }
@@ -90,13 +90,21 @@ void CRobotContext::CalibrateCallback(const RobotArmController::Move::ConstPtr& 
     {
         servoInstructions.emplace_back(std::make_shared<CServoInstruction>(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed));
     }
-    CEvent event(MOVE, calibrateMsg->preemptive, servoInstructions);
-    m_queuedEventQueue.push(event);
+    CEvent event(CALIBRATE, calibrateMsg->preemptive, servoInstructions);
+    if(event.IsPreemptive())
+    {
+        m_preemptiveEventQueue.push(event);
+    }
+    else
+    {
+        m_queuedEventQueue.push(event);
+    }
 }
 
 void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencyStop::ConstPtr& stopMsg)
 {
-    std::shared_ptr<IRobotStates> stopState = std::make_shared<CStopState>();
+    CEvent event(EMERGENCY_STOP);
+    std::shared_ptr<IRobotStates> stopState = std::make_shared<CStopState>(event, m_spConfiguration);
     SetState(stopState);
 }
 

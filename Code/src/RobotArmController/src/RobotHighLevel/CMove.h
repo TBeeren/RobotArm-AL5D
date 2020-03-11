@@ -13,7 +13,7 @@ class CCommandAL5D;
 class CMove
 {
 public:
-    CMove();
+    CMove(std::shared_ptr<CConfiguration> spConfiguration);
     ~CMove();
 
     void Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions);
@@ -22,6 +22,7 @@ public:
 private:
     uint16_t DegreesToPWM(eServos servo, int16_t degrees);
 
+    std::shared_ptr<CConfiguration> m_spConfiguration;
     std::shared_ptr<IExecuteCommand> m_spExecuteCommand;
 
 };

@@ -22,12 +22,13 @@ public:
     ~CCommunicate();
 
     bool Init();
+    bool Close();
     bool WriteSerial(const std::string& rMessage);
 
 private:
+    boost::asio::io_service m_ioService;
     std::string m_serialName;
     boost::asio::serial_port m_serialPort;
-    boost::asio::io_service m_ioService;
 
 };
 

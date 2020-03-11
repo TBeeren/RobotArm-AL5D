@@ -31,15 +31,21 @@ namespace
     constexpr const uint8_t maxValueVectorIndex = 1;
 }
 
-CConfiguration::CConfiguration(std::shared_ptr<CConfiguration> spConfiguration)
-: m_spConfiguration(spConfiguration)
-, m_baseConfig(minBaseValue, maxBaseValue)
+CConfiguration::CConfiguration()
+: m_baseConfig(minBaseValue, maxBaseValue)
 , m_shoulderConfig(minShoulderValue, maxShoulderValue)
 , m_elbowConfig(minElbowValue, maxElbowValue)
 , m_wristConfig(minWristValue, maxWristValue)
 , m_gripperConfig(minGripperValue, maxGripperValue)
 , m_wristRotateConfig(minGripperValue, maxGripperValue)
 {
+    programmedPositions =
+    {
+        {eProgrammedPosition::PARK, "PARK"},
+        {eProgrammedPosition::READY, "READY"},
+        {eProgrammedPosition::STRAIGHT, "STRAIGHT"}
+    };
+
     // Initialising the map with servo configuration.
     configuredServos =
     {
@@ -105,6 +111,17 @@ void CConfiguration::Write(eServos eServo, uint16_t minValue, uint16_t maxValue)
         default:
         {
             break;
+        }
+    }
+}
+
+eProgrammedPosition CConfiguration::StringToProgrammedPosition(std::string programmedPositionString)
+{
+    for(auto programmedPosition : programmedPositions)
+    {
+        if(programmedPosition.second == programmedPositionString)
+        {
+            return programmedPosition.first;
         }
     }
 }

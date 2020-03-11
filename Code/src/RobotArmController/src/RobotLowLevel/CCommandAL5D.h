@@ -13,6 +13,7 @@
 #define CCOMMANDAL5D_H
 
 #include "IExecuteCommand.h"
+#include "../RobotHighLevel/CConfiguration.h"
 #include <memory>
 #include <vector>
 #include <map>
@@ -35,19 +36,21 @@ public:
 
     void Stop() override;
     void Write(const std::string& rMessage) override;
-    void AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration) override;
+    void AppendInstruction(eCommand eCommand, int8_t servo ,int64_t position, int64_t speed, int64_t duration) override;
     void ClearLists() override;
-    
-    void Execute();
+    void Execute() override;
 
 private:
     std::string CreateMessage();
+    bool IsHardwareCompatible(eServos servo, int64_t position);
 
-    std::array<uint64_t, INSTRUCTION_ARRAY_SIZE> m_positionArray;
-    std::array<uint64_t, INSTRUCTION_ARRAY_SIZE> m_speedArray;
-    std::array<uint64_t, INSTRUCTION_ARRAY_SIZE> m_durationArray;
 
     std::shared_ptr<CCommunicate> m_spCommunicate;
+
+    std::vector<int64_t> m_targets;
+    std::vector<int64_t> m_positions;
+    std::vector<int64_t> m_speeds;
+    std::vector<int64_t> m_durations;
     std::map<eCommand, std::vector<uint64_t>> m_instructionList;
 };
 

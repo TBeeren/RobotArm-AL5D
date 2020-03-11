@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
   <zoom_level>11</zoom_level>
   <element>
     <id>UMLState</id>
@@ -136,7 +160,7 @@ evCalibrate</panel_attributes>
       <x>484</x>
       <y>297</y>
       <w>242</w>
-      <h>55</h>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 evCalibrateDone
@@ -148,7 +172,7 @@ evCalibrateDone
     <coordinates>
       <x>825</x>
       <y>374</y>
-      <w>88</w>
+      <w>66</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
@@ -161,7 +185,7 @@ evStop
     <coordinates>
       <x>429</x>
       <y>385</y>
-      <w>88</w>
+      <w>77</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
@@ -174,7 +198,7 @@ evMove</panel_attributes>
       <x>484</x>
       <y>517</y>
       <w>242</w>
-      <h>55</h>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 evStop
@@ -223,7 +247,7 @@ bg=yellow</panel_attributes>
     <coordinates>
       <x>286</x>
       <y>385</y>
-      <w>132</w>
+      <w>99</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
@@ -233,16 +257,16 @@ evMoveDone</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>176</x>
+      <x>198</x>
       <y>550</y>
-      <w>187</w>
-      <h>132</h>
+      <w>143</w>
+      <h>121</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 
 
 evMove(isPreemtive)
 [isPreemptive]</panel_attributes>
-    <additional_attributes>110.0;40.0;110.0;60.0;50.0;60.0;50.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>90.0;40.0;90.0;60.0;30.0;60.0;30.0;10.0;60.0;10.0</additional_attributes>
   </element>
 </diagram>

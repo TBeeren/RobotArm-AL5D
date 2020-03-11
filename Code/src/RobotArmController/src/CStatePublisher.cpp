@@ -1,24 +1,31 @@
 #include "CStatePublisher.h"
 #include "RobotArmController/State.h"
 
+/*static*/ CStatePublisher* CStatePublisher::m_pInstance = nullptr;
+
 CStatePublisher::CStatePublisher()
 : m_nodeHandle()
-, m_publisher(m_nodeHandle.advertise<RobotArmController::State>("\\MotionController\\State",1000))
 {
+    m_publisher = m_nodeHandle.advertise<RobotArmController::State>("/RobotArmController/State",1000);
 }
 
 CStatePublisher::~CStatePublisher()
 {
+    delete m_pInstance;
 }
 
-/*static*/ CStatePublisher CStatePublisher::GetInstance()
+/*static*/ CStatePublisher* CStatePublisher::GetInstance()
 {
-    static CStatePublisher statePublisher;
-    return statePublisher;
+    if (m_pInstance == nullptr)
+    {
+        m_pInstance = new CStatePublisher;
+    }
+    return m_pInstance;
 }
 
 void CStatePublisher::PublishState(ePublishableStates state)
 {
+
     RobotArmController::State stateMessage;
     switch (state)
     {
@@ -49,4 +56,5 @@ void CStatePublisher::PublishState(ePublishableStates state)
         }
     }
     m_publisher.publish(stateMessage);
+
 }
