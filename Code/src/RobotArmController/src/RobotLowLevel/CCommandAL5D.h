@@ -1,7 +1,7 @@
 /**
  * @file CCommandAL5D.h
  * @author Tim Beeren (T.Beeren1@student.han.nl)
- * @brief 
+ * @brief The CommandAL5D class is a realistation of the IExecuteCommand. It is reponsible for commanding the AL5D robotarm and is used by higher level drivers
  * @version 0.1
  * @date 06-03-2020
  * 
@@ -41,7 +41,20 @@ public:
     void Execute() override;
 
 private:
+    /**
+     * @brief Creates a string messages based on instructions appended to this class.
+     * 
+     * @return std::string the resulting string message to be sent to the AL5D robotarm.
+     */
     std::string CreateMessage();
+    /**
+     * @brief Checks whether the position specified is within the reachable boundries for the robotarm.
+     * 
+     * @param servo the servo for which to check the validity of the position
+     * @param position the position that needs to be checked for hardware compatibility
+     * @return true Returns true if command is compatible with the hardware
+     * @return false Returns false if the command is not compatible with the hardware
+     */
     bool IsHardwareCompatible(eServos servo, int64_t position);
 
 
