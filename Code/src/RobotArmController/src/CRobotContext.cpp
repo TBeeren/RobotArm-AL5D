@@ -48,6 +48,11 @@ void CRobotContext::Run()
             m_queuedEventQueue.pop();
             m_spCurrentState->HandleEvent(event, *this);
         }
+        if(m_preemptiveEventQueue.empty() && m_queuedEventQueue.empty() && (deadline <= std::chrono::system_clock::now()))
+        {
+            CEvent event(IDLE);
+            m_preemptiveEventQueue.push(event);
+        }
         ros::spinOnce();
     }while(ros::ok());
 }
@@ -112,8 +117,6 @@ void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencySto
 
 void CRobotContext::ProgrammedPositionCallback(const RobotArmController::ProgrammedPosition::ConstPtr& programmedPositionMsg)
 {
-
-    std::cout<< programmedPositionMsg->programmedPosition <<std::endl;
     switch (m_spConfiguration->StringToProgrammedPosition(programmedPositionMsg->programmedPosition))
     {
     case PARK:

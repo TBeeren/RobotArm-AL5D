@@ -35,12 +35,6 @@ void CIdleState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
 {
     switch (rEvent.GetEventType())
     {
-    case IDLE:
-    {
-        std::shared_ptr<IRobotStates> newState = std::make_shared<CIdleState>(rEvent, m_spConfiguration);
-        rContext.SetState(newState);
-        break;
-    }
     case MOVE:
     {
         std::shared_ptr<IRobotStates> newState = std::make_shared<CMoveState>(rEvent, m_spConfiguration);
@@ -61,7 +55,6 @@ void CIdleState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
     }
     default:
     {
-        std::cout<<"Event type not implemented"<<std::endl;
         break;
     }
     }
@@ -123,7 +116,7 @@ void CCalibrateState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
     }
     default:
     {
-        std::cout<<"Event type not implemented"<<std::endl;
+        std::cout<<"State transition not implemented"<<std::endl;
         break;
     }
     }
@@ -185,7 +178,7 @@ void CMoveState::HandleEvent(CEvent& rEvent, CRobotContext& rContext)
     }
     default:
     {
-        std::cout<<"Event type not implemented"<<std::endl;
+        std::cout<<"State transition not implemented"<<std::endl;
         break;
     }
     }

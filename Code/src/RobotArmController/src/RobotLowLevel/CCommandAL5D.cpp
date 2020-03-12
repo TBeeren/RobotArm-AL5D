@@ -44,7 +44,6 @@ void CCommandAL5D::Write(const std::string& rMessage)
 
 void CCommandAL5D::ClearLists()
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
     m_targets.clear();
     m_positions.clear();
     m_speeds.clear();
@@ -53,9 +52,6 @@ void CCommandAL5D::ClearLists()
 
 void CCommandAL5D::AppendInstruction(eCommand eCommand, int8_t servo ,int64_t position, int64_t speed, int64_t duration)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
-
-
     switch (eCommand)
     {
         case eCommand::MOVE_COMMAND:
@@ -138,23 +134,9 @@ bool CCommandAL5D::IsHardwareCompatible(eServos servo, int64_t position)
     return success;
 }
 
-// Servo ID: #5 
-// Position: P1600 
-// Time    : T2500 
-// Speed   : S500
 std::string CCommandAL5D::CreateMessage()
 {
     std::string returnMessage = "";
-
-    for(uint16_t i = 0; i < m_targets.size(); ++i)
-    {
-        std::cout << "Creating a message!" << std::endl;
-        std::cout << "Target Servo: " << m_targets.at(i) << std::endl;
-        std::cout << "Position: "  << m_positions.at(i) << std::endl;
-        std::cout << "Duration: :" << m_durations.at(i) << std::endl;
-        std::cout << "Position: "  << m_speeds.at(i) << std::endl;
-    }
-
     for(uint16_t i = 0; i < m_targets.size(); ++i)
     {
         returnMessage.append("#");
@@ -192,9 +174,7 @@ std::string CCommandAL5D::CreateMessage()
         std::cout<< "[Error]: Created message doesn't suite the protocol."<<std::endl;
     }
 
-    ClearLists();
-    std::cout << returnMessage << std::endl;
-    
+    ClearLists();    
     return returnMessage;
 }
 
@@ -202,8 +182,6 @@ void CCommandAL5D::Execute()
 {
     // Assert if the instruction arrays aren't equal and bigger then 0. 
     assert(m_targets.size() != 0);
-    std::cout << "pos " << m_positions.size()<< "speeds "<< m_speeds.size()<< "durations " << m_durations.size()<<std::endl;
-
     // Write Serial with the converted string.
     m_spCommunicate->WriteSerial(CreateMessage());
 }   

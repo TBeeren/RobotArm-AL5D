@@ -25,8 +25,7 @@ CCalibration::~CCalibration()
 }
 
 void CCalibration::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
-{   
-    std::cout << "[Status]-> Entering the Execute" << std::endl;
+{
     for(std::shared_ptr<CServoInstruction> instruction: rServoIntructions)
     {
         WriteConfig(instruction->GetTargetServo(), m_spMove->CalibrationDegreesToPwm(instruction->GetPosition()));

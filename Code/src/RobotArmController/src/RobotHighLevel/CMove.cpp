@@ -73,8 +73,6 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
         }
         case eServos::ELBOW:
         {
-            std::cout <<"LowerBoundry: " << m_spConfiguration->GetMinPWM(servo) <<std::endl;
-            std::cout <<"UpperBoundry: " << m_spConfiguration->GetMaxPWM(servo) <<std::endl;
             PWM = ((static_cast<uint16_t>((m_spConfiguration->GetMaxPWM(servo) - m_spConfiguration->GetMinPWM(servo)) / TOTAL_DEGREES_ELBOW) * degrees) 
             + (m_spConfiguration->GetMinPWM(servo)));
             break;
@@ -109,8 +107,6 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
 
 uint16_t CMove::CalibrationDegreesToPwm(int16_t degrees)
 {
-    std::cout<<"Degrees: " << degrees<< std::endl;
-    std::cout<<"PWM:  " << (static_cast<uint16_t>((MAXIMUM_PWM_VALUE - MINIMAL_PWM_VALUE) / 150.0) * degrees) + ((MINIMAL_PWM_VALUE + MAXIMUM_PWM_VALUE)/2)<< std::endl;
     return (static_cast<uint16_t>((MAXIMUM_PWM_VALUE - MINIMAL_PWM_VALUE) / 150.0) * degrees) + ((MINIMAL_PWM_VALUE + MAXIMUM_PWM_VALUE)/2);
 
 }
@@ -188,7 +184,6 @@ bool CMove::IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruct
 
 void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoInstructions)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
     assert(rServoInstructions.size() != 0);
     bool success = true;
 
@@ -225,13 +220,16 @@ void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruc
                 rInstruction->GetDuration()
             );
         }
-
-        if(!IsInstructionValid(rInstruction) && (eCommand != eCommand::CALIBRATE_COMMAND))
+        
+        if(eCommand != eCommand::STOP_COMMAND)
         {
-            m_spExecuteCommand->ClearLists();
-            std::cout<< " [Warning]-> Wrong Instruction! Please provide valid syntax"<< std::endl;
-            success = false;
-            break; 
+            if(!IsInstructionValid(rInstruction) && (eCommand != eCommand::CALIBRATE_COMMAND))
+            {
+                m_spExecuteCommand->ClearLists();
+                std::cout<< " [Warning]-> Wrong Instruction! Please provide valid syntax"<< std::endl;
+                success = false;
+                break; 
+            }
         }
     }
 
