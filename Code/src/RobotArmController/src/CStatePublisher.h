@@ -38,11 +38,17 @@ public:
      */
     static CStatePublisher* GetInstance();
     /**
-     * @brief Publishes the state on the /RobotArmController/State ros topic
+     * @brief Publishes the state on the /RobotArmController/BehaviouralState ros topic
      * 
      * @param state the state to publish on the before mentioned ros topic
      */
     void PublishState(ePublishableStates state);
+    /**
+     * @brief Publishes the state on the /RobotArmController/ProtocolState ros topic
+     * 
+     * @param state the state to publish on the before mentioned ros topic
+     */
+    void PublishProtocolState(ePublishableStates state);
 
 private:
     /**
@@ -52,7 +58,8 @@ private:
     CStatePublisher();
     static CStatePublisher* m_pInstance;
     ros::NodeHandle m_nodeHandle;
-    ros::Publisher m_publisher;
+    ros::Publisher m_statePublisher;
+    ros::Publisher m_protocolStatePublisher;
 };
 
 #endif /*CSTATEPUBLISHER_H*/

@@ -37,6 +37,9 @@ namespace
     constexpr const int16_t TOTAL_DEGREES_ELBOW = 135;
     constexpr const int16_t TOTAL_DEGREES_WRIST = 180;
     constexpr const int16_t TOTAL_DEGREES_WRIST_ROTATE = 180;
+
+    constexpr const int8_t MINIMUM = 0;
+    constexpr const int8_t MAXIMUM = 1;
 }
 
 CMove::CMove(std::shared_ptr<CConfiguration> spConfiguration)
@@ -70,8 +73,10 @@ uint16_t CMove::DegreesToPWM(eServos servo, int16_t degrees)
         }
         case eServos::ELBOW:
         {
+            std::cout <<"LowerBoundry: " << m_spConfiguration->GetMinPWM(servo) <<std::endl;
+            std::cout <<"UpperBoundry: " << m_spConfiguration->GetMaxPWM(servo) <<std::endl;
             PWM = ((static_cast<uint16_t>((m_spConfiguration->GetMaxPWM(servo) - m_spConfiguration->GetMinPWM(servo)) / TOTAL_DEGREES_ELBOW) * degrees) 
-            + (m_spConfiguration->GetMaxPWM(servo) + m_spConfiguration->GetMinPWM(servo))/2);
+            + (m_spConfiguration->GetMinPWM(servo)));
             break;
         }
         case eServos::WRIST:
@@ -110,8 +115,66 @@ uint16_t CMove::CalibrationDegreesToPwm(int16_t degrees)
 
 }
 
+std::vector<int> CMove::GetMinAndMaxValue(std::shared_ptr<CServoInstruction> instruction)
+{
+    std::vector<int> returnVector = {0,0};
+    switch (instruction->GetTargetServo())
+    {
+        case eServos::BASE:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_BASE;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_BASE;
+            break;
+        }
+        case eServos::SHOULDER:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_SHOULDER;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_SHOULDER;
+            break;
+        }
+        case eServos::ELBOW:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_ELBOW;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_ELBOW;
+            break;
+        }
+        case eServos::WRIST:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_WRIST;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_WRIST;
+           break;
+        }
+        case eServos::GRIPPER:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_BASE;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_BASE;
+           break;
+        }
+        case eServos::WRIST_ROTATE:
+        {
+            returnVector[MINIMUM] = MINIMAL_DEGREES_WRIST_ROTATE;
+            returnVector[MAXIMUM] = MAXIMAL_DEGREES_WRIST_ROTATE;
+           break;
+        }
+        default:
+        {
+            std::cout<< "[Warning]-> Hardware is not compatible" << std::endl;
+            break;
+        }
+    }
+    return returnVector;
+}
+
 bool CMove::IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruction)
 {
+    std::vector<int> minAndMaxValue = GetMinAndMaxValue(rServoInstruction);
+
+    if(rServoInstruction->GetPosition() < minAndMaxValue[MINIMUM] ||
+         rServoInstruction->GetPosition() > minAndMaxValue[MAXIMUM])
+         {
+             return false;
+         }
+
     if(rServoInstruction->GetTargetServo() >= eServos::UNKNOWN_SERVO)
     {
         return false;
@@ -131,7 +194,18 @@ void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruc
 
     for(const auto& rInstruction : rServoInstructions)
     {
-        if(eCommand == eCommand::CALIBRATE_COMMAND)
+        if(eCommand == eCommand::STOP_COMMAND)
+        {
+            m_spExecuteCommand->AppendInstruction(
+                eCommand, 
+                0, 
+                0,
+                0, 
+                0
+            );   
+            success = false;
+        }
+        else if(eCommand == eCommand::CALIBRATE_COMMAND)
         {
             m_spExecuteCommand->AppendInstruction(
                 eCommand, 
@@ -152,7 +226,7 @@ void CMove::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruc
             );
         }
 
-        if(!IsInstructionValid(rInstruction))
+        if(!IsInstructionValid(rInstruction) && (eCommand != eCommand::CALIBRATE_COMMAND))
         {
             m_spExecuteCommand->ClearLists();
             std::cout<< " [Warning]-> Wrong Instruction! Please provide valid syntax"<< std::endl;

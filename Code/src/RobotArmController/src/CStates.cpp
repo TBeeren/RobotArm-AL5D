@@ -20,6 +20,7 @@ CIdleState::~CIdleState()
 void CIdleState::Entry()
 {
     CStatePublisher::GetInstance()->PublishState(ePublishableStates::PUBLISH_IDLE);
+    CStatePublisher::GetInstance()->PublishProtocolState(ePublishableStates::PUBLISH_IDLE);
 }
 void CIdleState::Do()
 {
@@ -80,12 +81,12 @@ CCalibrateState::~CCalibrateState()
 void CCalibrateState::Entry()
 {
     CStatePublisher::GetInstance()->PublishState(ePublishableStates::PUBLISH_CALIBRATE);
+    CStatePublisher::GetInstance()->PublishProtocolState(ePublishableStates::PUBLISH_CALIBRATE);
+    CCalibration calibration(m_spConfiguration);
+    calibration.Execute(eCommand::CALIBRATE_COMMAND, m_Event.GetServoInstructions());
 }
 void CCalibrateState::Do()
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
-    CCalibration calibration(m_spConfiguration);
-    calibration.Execute(eCommand::CALIBRATE_COMMAND, m_Event.GetServoInstructions());
 }
 void CCalibrateState::Exit()
 {
@@ -142,11 +143,12 @@ CMoveState::~CMoveState()
 void CMoveState::Entry()
 {
     CStatePublisher::GetInstance()->PublishState(ePublishableStates::PUBLISH_MOVE);   
+    CStatePublisher::GetInstance()->PublishProtocolState(ePublishableStates::PUBLISH_MOVE);   
+    CMove move(m_spConfiguration);
+    move.Execute(MOVE_COMMAND, m_Event.GetServoInstructions());
 }
 void CMoveState::Do()
 {
-    CMove move(m_spConfiguration);
-    move.Execute(MOVE_COMMAND, m_Event.GetServoInstructions());
 }
 void CMoveState::Exit()
 {
@@ -203,11 +205,12 @@ CStopState::~CStopState()
 void CStopState::Entry()
 {
     CStatePublisher::GetInstance()->PublishState(ePublishableStates::PUBLISH_EMERGENCY_STOP); 
+    CStatePublisher::GetInstance()->PublishProtocolState(ePublishableStates::PUBLISH_EMERGENCY_STOP); 
+    CMove move(m_spConfiguration);
+    move.Execute(STOP_COMMAND, m_Event.GetServoInstructions());
 }
 void CStopState::Do()
 {
-    CMove move(m_spConfiguration);
-    move.Execute(STOP_COMMAND, m_Event.GetServoInstructions());
 }
 void CStopState::Exit()
 {

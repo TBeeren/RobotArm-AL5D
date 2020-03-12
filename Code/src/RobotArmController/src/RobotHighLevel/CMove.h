@@ -21,6 +21,7 @@ public:
     bool IsInstructionValid(std::shared_ptr<CServoInstruction> rServoInstruction);
     uint16_t DegreesToPWM(eServos servo, int16_t degrees);
     uint16_t CalibrationDegreesToPwm(int16_t degrees);
+    std::vector<int> GetMinAndMaxValue(std::shared_ptr<CServoInstruction> instruction);
 
 private:
     std::shared_ptr<CConfiguration> m_spConfiguration;

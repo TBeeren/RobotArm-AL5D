@@ -1,3 +1,13 @@
+/**
+ * @file CStates.h
+ * @author Evren Kilic (ET.Kilic@student.han.nl)
+ * @brief In this file are the various states which the RobotArmController's state machine can be in
+ * @version 0.1
+ * @date 11-03-2020
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef CSTATES_H
 #define CSTATES_H
 
@@ -10,6 +20,12 @@ class CConfiguration;
 class CIdleState: public IRobotStates
 {
 public:
+/**
+ * @brief The state a new RobotArmController is in and its in while it is idle
+ * 
+ * @param rEvent 
+ * @param spConfiguration 
+ */
     CIdleState(CEvent& rEvent, std::shared_ptr<CConfiguration> spConfiguration);
     ~CIdleState();
 

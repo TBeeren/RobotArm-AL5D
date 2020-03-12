@@ -210,5 +210,10 @@ void CCommandAL5D::Execute()
 
 void CCommandAL5D::Stop()
 {
-    m_spCommunicate->WriteSerial(STOP_MESSAGE);
+    std::string Message = STOP_MESSAGE;
+    
+    char cr = 13;
+    Message += cr;
+    
+    m_spCommunicate->WriteSerial(Message);
 }

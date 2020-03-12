@@ -119,16 +119,27 @@ int main(int argc, char *argv[])
 
                     std::string servoString = "";
                     std::string positionString = "";
+                    if(command.find("-") != std::string::npos)
+                    {
+                        positionString.append("-");
+                        for (int i = positionStart + 2; isdigit(command[i]); ++i)
+                        {
+                            positionString += command[i];
+                        }
+                    }
+                    else
+                    {
+                        for (int i = positionStart + 1; isdigit(command[i]); ++i)
+                        {
+                            positionString += command[i];
+                        }
+                    }                    
                     std::string durationString = "";
                     std::string speedString = "";
 
                     for (int i = servoStart + 1; isdigit(command[i]); ++i)
                     {
                         servoString += command[i];
-                    }
-                    for (int i = positionStart + 1; isdigit(command[i]); ++i)
-                    {
-                        positionString += command[i];
                     }
                     for (int i = speedStart + 1; isdigit(command[i]); ++i)
                     {

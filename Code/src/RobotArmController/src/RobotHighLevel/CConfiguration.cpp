@@ -15,8 +15,8 @@
 //Anonymous namespace
 namespace 
 {
-    constexpr uint16_t minPWMValue = 1000; 
-    constexpr uint16_t maxPWMValue = 2000;
+    constexpr uint16_t minPWMValue = 1250; 
+    constexpr uint16_t maxPWMValue = 1750;
 
     constexpr const uint8_t minValueVectorIndex = 0;
     constexpr const uint8_t maxValueVectorIndex = 1;
