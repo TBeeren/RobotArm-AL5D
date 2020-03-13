@@ -1,0 +1,139 @@
+\hypertarget{classCMove}{}\section{C\+Move Class Reference}
+\label{classCMove}\index{C\+Move@{C\+Move}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCMove_a49dbf1de9a8eadbf9ea8b1929ca3e626}\label{classCMove_a49dbf1de9a8eadbf9ea8b1929ca3e626}} 
+{\bfseries C\+Move} (std\+::shared\+\_\+ptr$<$ \hyperlink{classCConfiguration}{C\+Configuration} $>$ sp\+Configuration)
+\item 
+void \hyperlink{classCMove_a0c7bf10c045b4369b0d32a63d93ed990}{Execute} (e\+Command e\+Command, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$$>$ r\+Servo\+Instructions)
+\begin{DoxyCompactList}\small\item\em Executes servo commands and ultimately moves the robotarm when instructions are valid. \end{DoxyCompactList}\item 
+void \hyperlink{classCMove_a9fdfeec108cc173657146525cdf48824}{Execute\+Calibrate} (e\+Command e\+Command, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$$>$ r\+Servo\+Instructions)
+\begin{DoxyCompactList}\small\item\em Executes servo commands and ultimately moves the robotarm when instructions are valid. Using this function will set the values in the robotarms configuration when they surpass current boundries. \end{DoxyCompactList}\item 
+bool \hyperlink{classCMove_a42a503487eb0aeed688fad00e18c8071}{Is\+Instruction\+Valid} (std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$ r\+Servo\+Instruction)
+\begin{DoxyCompactList}\small\item\em Checks the validity of servo instructions based on the minimal angle and maximum angle of the servo\textquotesingle{}s. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classCMove_a716dede77aa60e3b3254f1d436cf2c40}{Degrees\+To\+P\+WM} (e\+Servos servo, int16\+\_\+t degrees)
+\begin{DoxyCompactList}\small\item\em Calculates the degrees, commonly stored in servoinstructions, to P\+WM for a specific servo based on its ranges. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classCMove_ace7c94d5da8fed1ae1f9cad3d17bba3f}{Calibration\+Degrees\+To\+Pwm} (int16\+\_\+t degrees)
+\begin{DoxyCompactList}\small\item\em Calculates the degrees, commonly storedd in servoinstructions, to P\+WM for a specific servo based on its ranges. This function is used when commanding the robotarm during calibration. For this calculation a standardised set of upper and lower limits is used. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{classCMove_ae34b579c70c71a761af9245db1b7571e}{Get\+Min\+And\+Max\+Value} (std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$ instruction)
+\begin{DoxyCompactList}\small\item\em This function gets the upper and lower limit for a servo which has an instruction for it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCMove_ace7c94d5da8fed1ae1f9cad3d17bba3f}\label{classCMove_ace7c94d5da8fed1ae1f9cad3d17bba3f}} 
+\index{C\+Move@{C\+Move}!Calibration\+Degrees\+To\+Pwm@{Calibration\+Degrees\+To\+Pwm}}
+\index{Calibration\+Degrees\+To\+Pwm@{Calibration\+Degrees\+To\+Pwm}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Calibration\+Degrees\+To\+Pwm()}{CalibrationDegreesToPwm()}}
+{\footnotesize\ttfamily uint16\+\_\+t C\+Move\+::\+Calibration\+Degrees\+To\+Pwm (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{degrees }\end{DoxyParamCaption})}
+
+
+
+Calculates the degrees, commonly storedd in servoinstructions, to P\+WM for a specific servo based on its ranges. This function is used when commanding the robotarm during calibration. For this calculation a standardised set of upper and lower limits is used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degrees} & the degrees to be translated to P\+WM \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t the P\+WM which matches the degrees 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCMove_a716dede77aa60e3b3254f1d436cf2c40}\label{classCMove_a716dede77aa60e3b3254f1d436cf2c40}} 
+\index{C\+Move@{C\+Move}!Degrees\+To\+P\+WM@{Degrees\+To\+P\+WM}}
+\index{Degrees\+To\+P\+WM@{Degrees\+To\+P\+WM}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Degrees\+To\+P\+W\+M()}{DegreesToPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t C\+Move\+::\+Degrees\+To\+P\+WM (\begin{DoxyParamCaption}\item[{e\+Servos}]{servo,  }\item[{int16\+\_\+t}]{degrees }\end{DoxyParamCaption})}
+
+
+
+Calculates the degrees, commonly stored in servoinstructions, to P\+WM for a specific servo based on its ranges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em servo} & the servo whose minimum and maximum values will be used in the calculation \\
+\hline
+{\em degrees} & the degrees which will de rewritten into P\+WM \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t returns the amount of P\+WM that matches the degrees 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCMove_a0c7bf10c045b4369b0d32a63d93ed990}\label{classCMove_a0c7bf10c045b4369b0d32a63d93ed990}} 
+\index{C\+Move@{C\+Move}!Execute@{Execute}}
+\index{Execute@{Execute}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void C\+Move\+::\+Execute (\begin{DoxyParamCaption}\item[{e\+Command}]{e\+Command,  }\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$$>$}]{r\+Servo\+Instructions }\end{DoxyParamCaption})}
+
+
+
+Executes servo commands and ultimately moves the robotarm when instructions are valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Command} & the type of command to be executed by the robotarm \\
+\hline
+{\em r\+Servo\+Instructions} & a list of instructions for the different servos \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCMove_a9fdfeec108cc173657146525cdf48824}\label{classCMove_a9fdfeec108cc173657146525cdf48824}} 
+\index{C\+Move@{C\+Move}!Execute\+Calibrate@{Execute\+Calibrate}}
+\index{Execute\+Calibrate@{Execute\+Calibrate}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Execute\+Calibrate()}{ExecuteCalibrate()}}
+{\footnotesize\ttfamily void C\+Move\+::\+Execute\+Calibrate (\begin{DoxyParamCaption}\item[{e\+Command}]{e\+Command,  }\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$$>$}]{r\+Servo\+Instructions }\end{DoxyParamCaption})}
+
+
+
+Executes servo commands and ultimately moves the robotarm when instructions are valid. Using this function will set the values in the robotarms configuration when they surpass current boundries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Command} & the type of command to be executed by the robotarm(usually C\+A\+L\+I\+B\+R\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+N\+D) \\
+\hline
+{\em r\+Servo\+Instructions} & a list of instructions for the different servos \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCMove_ae34b579c70c71a761af9245db1b7571e}\label{classCMove_ae34b579c70c71a761af9245db1b7571e}} 
+\index{C\+Move@{C\+Move}!Get\+Min\+And\+Max\+Value@{Get\+Min\+And\+Max\+Value}}
+\index{Get\+Min\+And\+Max\+Value@{Get\+Min\+And\+Max\+Value}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Get\+Min\+And\+Max\+Value()}{GetMinAndMaxValue()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ C\+Move\+::\+Get\+Min\+And\+Max\+Value (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$}]{instruction }\end{DoxyParamCaption})}
+
+
+
+This function gets the upper and lower limit for a servo which has an instruction for it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instruction} & the instruction for a specific servo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$int$>$ the lower limit of the servo followed by the upper limit of the servo. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCMove_a42a503487eb0aeed688fad00e18c8071}\label{classCMove_a42a503487eb0aeed688fad00e18c8071}} 
+\index{C\+Move@{C\+Move}!Is\+Instruction\+Valid@{Is\+Instruction\+Valid}}
+\index{Is\+Instruction\+Valid@{Is\+Instruction\+Valid}!C\+Move@{C\+Move}}
+\subsubsection{\texorpdfstring{Is\+Instruction\+Valid()}{IsInstructionValid()}}
+{\footnotesize\ttfamily bool C\+Move\+::\+Is\+Instruction\+Valid (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$}]{r\+Servo\+Instruction }\end{DoxyParamCaption})}
+
+
+
+Checks the validity of servo instructions based on the minimal angle and maximum angle of the servo\textquotesingle{}s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Servo\+Instruction} & the servoinstruction which will be tested for it\textquotesingle{}s validity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Returns true if the instruction is valid 
+
+false Returns false if the instruction is invalid 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+High\+Level/\hyperlink{CMove_8h}{C\+Move.\+h}\item 
+Robot\+High\+Level/\hyperlink{CMove_8cpp}{C\+Move.\+cpp}\end{DoxyCompactItemize}

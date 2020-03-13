@@ -1,0 +1,125 @@
+\hypertarget{classCCalibrateState}{}\section{C\+Calibrate\+State Class Reference}
+\label{classCCalibrateState}\index{C\+Calibrate\+State@{C\+Calibrate\+State}}
+
+
+Inheritance diagram for C\+Calibrate\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classCCalibrateState__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for C\+Calibrate\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classCCalibrateState__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCCalibrateState_aac8ef64d3e1d849d6e0dee9d219585b6}{C\+Calibrate\+State} (\hyperlink{classCEvent}{C\+Event} \&r\+Event, std\+::shared\+\_\+ptr$<$ \hyperlink{classCConfiguration}{C\+Configuration} $>$ sp\+Configuration)
+\begin{DoxyCompactList}\small\item\em The state a Robot\+Arm\+Controller is in while it is calibrating movement in this state will be used in the configuration class as a calibration. \end{DoxyCompactList}\item 
+void \hyperlink{classCCalibrateState_a361368643bad182ed1a78ee1d1a820e5}{Entry} ()
+\begin{DoxyCompactList}\small\item\em the entry action which will be executed for the various states when the context enters that state. \end{DoxyCompactList}\item 
+void \hyperlink{classCCalibrateState_a2b2ad369ae655704fadcffb0a4b9fca2}{Do} ()
+\begin{DoxyCompactList}\small\item\em The do activity which will be executed after the entry action for the various states when the context enters that state. \end{DoxyCompactList}\item 
+void \hyperlink{classCCalibrateState_a0bdb13da2af72f1e8e814a365f8d765a}{Exit} ()
+\begin{DoxyCompactList}\small\item\em The exit action which will executed when the context transitions off of the state. \end{DoxyCompactList}\item 
+void \hyperlink{classCCalibrateState_af24b30b6357a7b48f1157afdc0662984}{Handle\+Event} (\hyperlink{classCEvent}{C\+Event} \&r\+Event, \hyperlink{classCRobotContext}{C\+Robot\+Context} \&r\+Context)
+\begin{DoxyCompactList}\small\item\em The Handle\+Event function defines how the context will react to the next event, this depends on the state it is currently in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCCalibrateState_aac8ef64d3e1d849d6e0dee9d219585b6}\label{classCCalibrateState_aac8ef64d3e1d849d6e0dee9d219585b6}} 
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\subsubsection{\texorpdfstring{C\+Calibrate\+State()}{CCalibrateState()}}
+{\footnotesize\ttfamily C\+Calibrate\+State\+::\+C\+Calibrate\+State (\begin{DoxyParamCaption}\item[{\hyperlink{classCEvent}{C\+Event} \&}]{r\+Event,  }\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classCConfiguration}{C\+Configuration} $>$}]{sp\+Configuration }\end{DoxyParamCaption})}
+
+
+
+The state a Robot\+Arm\+Controller is in while it is calibrating movement in this state will be used in the configuration class as a calibration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Event} & The event that triggered this state \\
+\hline
+{\em sp\+Configuration} & the Configuration with the calibrated values for the robotarm, this will be passed when the handle\+Event function is called onto other states. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCCalibrateState_a2b2ad369ae655704fadcffb0a4b9fca2}\label{classCCalibrateState_a2b2ad369ae655704fadcffb0a4b9fca2}} 
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!Do@{Do}}
+\index{Do@{Do}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\subsubsection{\texorpdfstring{Do()}{Do()}}
+{\footnotesize\ttfamily void C\+Calibrate\+State\+::\+Do (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The do activity which will be executed after the entry action for the various states when the context enters that state. 
+
+
+
+Implements \hyperlink{classIRobotStates_aa681381e72738a2870c3f13f552a2e93}{I\+Robot\+States}.
+
+\mbox{\Hypertarget{classCCalibrateState_a361368643bad182ed1a78ee1d1a820e5}\label{classCCalibrateState_a361368643bad182ed1a78ee1d1a820e5}} 
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!Entry@{Entry}}
+\index{Entry@{Entry}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\subsubsection{\texorpdfstring{Entry()}{Entry()}}
+{\footnotesize\ttfamily void C\+Calibrate\+State\+::\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+the entry action which will be executed for the various states when the context enters that state. 
+
+
+
+Implements \hyperlink{classIRobotStates_af43ddb52f5100b42c3d11b71fb1f10dd}{I\+Robot\+States}.
+
+\mbox{\Hypertarget{classCCalibrateState_a0bdb13da2af72f1e8e814a365f8d765a}\label{classCCalibrateState_a0bdb13da2af72f1e8e814a365f8d765a}} 
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!Exit@{Exit}}
+\index{Exit@{Exit}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\subsubsection{\texorpdfstring{Exit()}{Exit()}}
+{\footnotesize\ttfamily void C\+Calibrate\+State\+::\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The exit action which will executed when the context transitions off of the state. 
+
+
+
+Implements \hyperlink{classIRobotStates_a099417875e67f047ca38e08890491529}{I\+Robot\+States}.
+
+\mbox{\Hypertarget{classCCalibrateState_af24b30b6357a7b48f1157afdc0662984}\label{classCCalibrateState_af24b30b6357a7b48f1157afdc0662984}} 
+\index{C\+Calibrate\+State@{C\+Calibrate\+State}!Handle\+Event@{Handle\+Event}}
+\index{Handle\+Event@{Handle\+Event}!C\+Calibrate\+State@{C\+Calibrate\+State}}
+\subsubsection{\texorpdfstring{Handle\+Event()}{HandleEvent()}}
+{\footnotesize\ttfamily void C\+Calibrate\+State\+::\+Handle\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{classCEvent}{C\+Event} \&}]{r\+Event,  }\item[{\hyperlink{classCRobotContext}{C\+Robot\+Context} \&}]{r\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The Handle\+Event function defines how the context will react to the next event, this depends on the state it is currently in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Event} & The next event to be handle by the state machine \\
+\hline
+{\em r\+Context} & The context which will go through a state because of the incoming event. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classIRobotStates_a0b6c28a3deed04f93371a9395022f1ed}{I\+Robot\+States}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{CStates_8h}{C\+States.\+h}\item 
+C\+States.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{classIRobotStates}{}\section{I\+Robot\+States Class Reference}
+\label{classIRobotStates}\index{I\+Robot\+States@{I\+Robot\+States}}
+
+
+Inheritance diagram for I\+Robot\+States\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classIRobotStates__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classIRobotStates_af43ddb52f5100b42c3d11b71fb1f10dd}{Entry} ()=0
+\begin{DoxyCompactList}\small\item\em the entry action which will be executed for the various states when the context enters that state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIRobotStates_aa681381e72738a2870c3f13f552a2e93}{Do} ()=0
+\begin{DoxyCompactList}\small\item\em The do activity which will be executed after the entry action for the various states when the context enters that state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIRobotStates_a099417875e67f047ca38e08890491529}{Exit} ()=0
+\begin{DoxyCompactList}\small\item\em The exit action which will executed when the context transitions off of the state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIRobotStates_a0b6c28a3deed04f93371a9395022f1ed}{Handle\+Event} (\hyperlink{classCEvent}{C\+Event} \&r\+Event, \hyperlink{classCRobotContext}{C\+Robot\+Context} \&r\+Context)=0
+\begin{DoxyCompactList}\small\item\em The Handle\+Event function defines how the context will react to the next event, this depends on the state it is currently in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIRobotStates_aa681381e72738a2870c3f13f552a2e93}\label{classIRobotStates_aa681381e72738a2870c3f13f552a2e93}} 
+\index{I\+Robot\+States@{I\+Robot\+States}!Do@{Do}}
+\index{Do@{Do}!I\+Robot\+States@{I\+Robot\+States}}
+\subsubsection{\texorpdfstring{Do()}{Do()}}
+{\footnotesize\ttfamily virtual void I\+Robot\+States\+::\+Do (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The do activity which will be executed after the entry action for the various states when the context enters that state. 
+
+
+
+Implemented in \hyperlink{classCStopState_aba51445ef29e03fa5ffc5cef48923a10}{C\+Stop\+State}, \hyperlink{classCMoveState_acd364df1357b25ee616a7444116cf9f6}{C\+Move\+State}, \hyperlink{classCCalibrateState_a2b2ad369ae655704fadcffb0a4b9fca2}{C\+Calibrate\+State}, and \hyperlink{classCIdleState_a7ae1fe9a96dfb78faaebd068bb8ecae7}{C\+Idle\+State}.
+
+\mbox{\Hypertarget{classIRobotStates_af43ddb52f5100b42c3d11b71fb1f10dd}\label{classIRobotStates_af43ddb52f5100b42c3d11b71fb1f10dd}} 
+\index{I\+Robot\+States@{I\+Robot\+States}!Entry@{Entry}}
+\index{Entry@{Entry}!I\+Robot\+States@{I\+Robot\+States}}
+\subsubsection{\texorpdfstring{Entry()}{Entry()}}
+{\footnotesize\ttfamily virtual void I\+Robot\+States\+::\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+the entry action which will be executed for the various states when the context enters that state. 
+
+
+
+Implemented in \hyperlink{classCStopState_aae7dbdb7db312f20a16fcd48edc60e83}{C\+Stop\+State}, \hyperlink{classCMoveState_ae9bda8d64d42c16e19facdfa8eb842e2}{C\+Move\+State}, \hyperlink{classCCalibrateState_a361368643bad182ed1a78ee1d1a820e5}{C\+Calibrate\+State}, and \hyperlink{classCIdleState_afcfc7e601c50b99c27380b9541fc3795}{C\+Idle\+State}.
+
+\mbox{\Hypertarget{classIRobotStates_a099417875e67f047ca38e08890491529}\label{classIRobotStates_a099417875e67f047ca38e08890491529}} 
+\index{I\+Robot\+States@{I\+Robot\+States}!Exit@{Exit}}
+\index{Exit@{Exit}!I\+Robot\+States@{I\+Robot\+States}}
+\subsubsection{\texorpdfstring{Exit()}{Exit()}}
+{\footnotesize\ttfamily virtual void I\+Robot\+States\+::\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The exit action which will executed when the context transitions off of the state. 
+
+
+
+Implemented in \hyperlink{classCStopState_a2bf7d1e44a9b0c689c86fb00f9684a7b}{C\+Stop\+State}, \hyperlink{classCMoveState_ac6f27ce9a561ab6baf297e106d3f346d}{C\+Move\+State}, \hyperlink{classCCalibrateState_a0bdb13da2af72f1e8e814a365f8d765a}{C\+Calibrate\+State}, and \hyperlink{classCIdleState_a634bf12d9a7f29504c7dc6df7d419835}{C\+Idle\+State}.
+
+\mbox{\Hypertarget{classIRobotStates_a0b6c28a3deed04f93371a9395022f1ed}\label{classIRobotStates_a0b6c28a3deed04f93371a9395022f1ed}} 
+\index{I\+Robot\+States@{I\+Robot\+States}!Handle\+Event@{Handle\+Event}}
+\index{Handle\+Event@{Handle\+Event}!I\+Robot\+States@{I\+Robot\+States}}
+\subsubsection{\texorpdfstring{Handle\+Event()}{HandleEvent()}}
+{\footnotesize\ttfamily virtual void I\+Robot\+States\+::\+Handle\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{classCEvent}{C\+Event} \&}]{r\+Event,  }\item[{\hyperlink{classCRobotContext}{C\+Robot\+Context} \&}]{r\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The Handle\+Event function defines how the context will react to the next event, this depends on the state it is currently in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Event} & The next event to be handle by the state machine \\
+\hline
+{\em r\+Context} & The context which will go through a state because of the incoming event. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classCStopState_abe6af38d9c6b80b98fd78cdb48d7599c}{C\+Stop\+State}, \hyperlink{classCMoveState_a49c6051142c4839e1a512f38859589ad}{C\+Move\+State}, \hyperlink{classCCalibrateState_af24b30b6357a7b48f1157afdc0662984}{C\+Calibrate\+State}, and \hyperlink{classCIdleState_a12d0c6b590c56cdc9018524d632d4871}{C\+Idle\+State}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{IRobotStates_8h}{I\+Robot\+States.\+h}\end{DoxyCompactItemize}
