@@ -27,16 +27,16 @@ fontsize=10
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>264</x>
-      <y>275</y>
+      <x>363</x>
+      <y>286</y>
       <w>231</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>IDLE
 --
-Entry:
-Do:
-Exit:
+Entry: PublishState(eState);
+Do: - 
+Exit: -
 
 valign=top
 </panel_attributes>
@@ -45,15 +45,16 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>704</x>
-      <y>264</y>
+      <x>770</x>
+      <y>275</y>
       <w>242</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>CALIBRATION
 --
-Entry:
-Do: CalibrateServos()
+Entry: WriteSerial(CALIBRATE_MESSAGE);
+           PublishState(eState);
+Do: Execute();
 Exit: -
 Defer: evMove
 
@@ -64,14 +65,15 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>264</x>
-      <y>473</y>
+      <x>363</x>
+      <y>484</y>
       <w>231</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>MOVE
 --
-Entry: AL5D-&gt;GEN(evMove)
+Entry: WriteSerial(MOVE_MESSAGE);
+          PublishState(eState);
 Do:
 Exit:
 Defer: evMove 
@@ -83,16 +85,17 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>704</x>
-      <y>473</y>
+      <x>770</x>
+      <y>484</y>
       <w>242</w>
       <h>121</h>
     </coordinates>
     <panel_attributes>EMERGENCY_STOP
 --
-Entry:AL5D-&gt;GEN(evStop);
-Do:
-Exit:
+Entry:WriteSerial(STOP_MESSAGE);
+         PublishState(eState);
+Do: 
+Exit: -
 
 valign=top
 </panel_attributes>
@@ -101,8 +104,8 @@ valign=top
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>363</x>
-      <y>165</y>
+      <x>462</x>
+      <y>176</y>
       <w>22</w>
       <h>22</h>
     </coordinates>
@@ -112,8 +115,8 @@ valign=top
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>363</x>
-      <y>165</y>
+      <x>462</x>
+      <y>176</y>
       <w>33</w>
       <h>132</h>
     </coordinates>
@@ -123,8 +126,8 @@ valign=top
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>154</x>
-      <y>341</y>
+      <x>253</x>
+      <y>352</y>
       <w>22</w>
       <h>22</h>
     </coordinates>
@@ -134,8 +137,8 @@ valign=top
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>165</x>
-      <y>341</y>
+      <x>264</x>
+      <y>352</y>
       <w>121</w>
       <h>33</h>
     </coordinates>
@@ -145,33 +148,33 @@ valign=top
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>330</y>
-      <w>242</w>
+      <x>583</x>
+      <y>341</y>
+      <w>209</w>
       <h>44</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 evCalibrate</panel_attributes>
-    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>297</y>
-      <w>242</w>
+      <x>583</x>
+      <y>308</y>
+      <w>209</w>
       <h>44</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 evCalibrateDone
 </panel_attributes>
-    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>825</x>
-      <y>374</y>
+      <x>891</x>
+      <y>385</y>
       <w>66</w>
       <h>121</h>
     </coordinates>
@@ -183,8 +186,8 @@ evStop
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>429</x>
-      <y>385</y>
+      <x>528</x>
+      <y>396</y>
       <w>77</w>
       <h>110</h>
     </coordinates>
@@ -195,35 +198,35 @@ evMove</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>517</y>
-      <w>242</w>
+      <x>583</x>
+      <y>528</y>
+      <w>209</w>
       <h>44</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 evStop
 </panel_attributes>
-    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>374</y>
-      <w>242</w>
+      <x>583</x>
+      <y>385</y>
+      <w>209</w>
       <h>132</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
       evStop
 </panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1023</x>
-      <y>231</y>
-      <w>242</w>
+      <x>1056</x>
+      <y>242</y>
+      <w>165</w>
       <h>143</h>
     </coordinates>
     <panel_attributes>*CalibrateServos():*
@@ -234,19 +237,19 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>935</x>
-      <y>308</y>
-      <w>110</w>
+      <x>1001</x>
+      <y>319</y>
+      <w>77</w>
       <h>33</h>
     </coordinates>
     <panel_attributes>lt=..</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>286</x>
-      <y>385</y>
+      <x>385</x>
+      <y>396</y>
       <w>99</w>
       <h>110</h>
     </coordinates>
@@ -257,8 +260,8 @@ evMoveDone</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>198</x>
-      <y>550</y>
+      <x>297</x>
+      <y>561</y>
       <w>143</w>
       <h>121</h>
     </coordinates>
