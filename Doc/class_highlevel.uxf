@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>70</y>
+      <w>1280</w>
+      <h>770</h>
+    </coordinates>
+    <panel_attributes>lt=.
+&lt;&lt;library&gt;&gt;
+*RobotHighLevel*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>620</y>
+      <w>370</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>CServoInstruction
+--
++ CServoInstruction(targetServo: eServos, 
+position: int64_t, duration: int64_t, speed: int64_t)
+GetTargetServo(): eServos
+GetPosition(): int64_t 
+GetDuration(): int64_t 
+GetSpeed(): int64_t 
+--
+- m_targetServo: uint8_t
+- m_position: int64_t
+- m_duration: uint64_t
+- m_speed: uint64_t
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>300</y>
+      <w>560</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>CCalibration
+--
++ CCalibration(CConfiguration: spConfiguration)
++ Execute(eCommand: eCommand, rServoIntructions: CServoInstruction: void
+- WriteConfig(eServo: eServos, value: uint16_t): bool
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>120</y>
+      <w>640</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>CMove
+--
++ CMove(spConfiguration: CConfiguration)
++ Execute(eCommand: eCommand, rServoInstructions: CServoInstruction[0..*]): void
++ ExecuteCalibrate(eCommand: eCommand, rServoInstructions: CServoInstruction): void
++ IsInstructionValid(rServoInstruction: CServoInstruction); bool
++ DegreesToPWM(servo: eServos, degrees: int16_t): uint16_t
++ CalibrationDegreesToPwm(degrees: int16_t): uint16_t
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>440</y>
+      <w>650</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>CConfiguration
+--
++ ExecuteMovement(): void
++ Write(eServo: eServos, value: uint16_t): void
++ GetMinPWM(eServo: eServos): uint16_t
++ GetMaxPWM(eServo: eServos ): uint16_t
++ StringToProgrammedPosition(programmedPositionString: string): eProgrammedPosition
+--
++ m_baseConfig: uint16_t[2]
++ m_shoulderConfig: uint16_t[2]
++ m_elbowConfig: uint16_t[2]
++ m_wristConfig: uint16_t[2]
++ m_gripperConfig: uint16_t[2]
++ m_wristRotateConfig: uint16_t[2]
++ configuredServos: (eServos, uint16_t[0..*])[0..*]
+- programmedPositions: (eProgrammedPosition, string)[0..*]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>400</y>
+      <w>30</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>190</y>
+      <w>400</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m_spMove: CMove
+</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0;380.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>400</y>
+      <w>320</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+
+m_spConfig: CConfiguration</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;300.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>260</y>
+      <w>270</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m_spConfiguration: CConfiguration</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>460</y>
+      <w>140</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>eServos
+--
+BASE,
+SHOULDER ,
+ELBOW,
+WRIST,
+GRIPPER,
+WRIST_ROTATE,
+UNKNOWN_SERVO
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>400</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>30</y>
+      <w>330</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m_spExecuteCommand: IExecuteCommand</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>620</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>eProgrammedPosition
+--
+PARK,
+READY,
+STRAIGHT
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>540</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>

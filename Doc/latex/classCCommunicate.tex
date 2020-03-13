@@ -1,0 +1,70 @@
+\hypertarget{classCCommunicate}{}\section{C\+Communicate Class Reference}
+\label{classCCommunicate}\index{C\+Communicate@{C\+Communicate}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classCCommunicate_ab410d966213135d9d5c9ede493c5c5d8}{Init} ()
+\begin{DoxyCompactList}\small\item\em Initialises the serial communication. \end{DoxyCompactList}\item 
+bool \hyperlink{classCCommunicate_ab1eefe862756c613c4d006902badfffa}{Close} ()
+\begin{DoxyCompactList}\small\item\em Closes the serial port if it was open. \end{DoxyCompactList}\item 
+bool \hyperlink{classCCommunicate_a322f1dc7ffdd18be70e6e6aa9eca3613}{Write\+Serial} (const std\+::string \&r\+Message)
+\begin{DoxyCompactList}\small\item\em Writes a string message to the robot arm through serial communication. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCCommunicate_ab1eefe862756c613c4d006902badfffa}\label{classCCommunicate_ab1eefe862756c613c4d006902badfffa}} 
+\index{C\+Communicate@{C\+Communicate}!Close@{Close}}
+\index{Close@{Close}!C\+Communicate@{C\+Communicate}}
+\subsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily bool C\+Communicate\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Closes the serial port if it was open. 
+
+\begin{DoxyReturn}{Returns}
+true Returns true when the serial port was succesfully closed 
+
+false Returns false when the serial port could not be closed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCCommunicate_ab410d966213135d9d5c9ede493c5c5d8}\label{classCCommunicate_ab410d966213135d9d5c9ede493c5c5d8}} 
+\index{C\+Communicate@{C\+Communicate}!Init@{Init}}
+\index{Init@{Init}!C\+Communicate@{C\+Communicate}}
+\subsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily bool C\+Communicate\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initialises the serial communication. 
+
+\begin{DoxyReturn}{Returns}
+true when serial communication has been established and the serial port has been opened 
+
+false when the serial port was unable to be opened for communication 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCCommunicate_a322f1dc7ffdd18be70e6e6aa9eca3613}\label{classCCommunicate_a322f1dc7ffdd18be70e6e6aa9eca3613}} 
+\index{C\+Communicate@{C\+Communicate}!Write\+Serial@{Write\+Serial}}
+\index{Write\+Serial@{Write\+Serial}!C\+Communicate@{C\+Communicate}}
+\subsubsection{\texorpdfstring{Write\+Serial()}{WriteSerial()}}
+{\footnotesize\ttfamily bool C\+Communicate\+::\+Write\+Serial (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{r\+Message }\end{DoxyParamCaption})}
+
+
+
+Writes a string message to the robot arm through serial communication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Message} & the message to send to the robotarm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true when the message was successfully sent 
+
+false when the message could not be send 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Low\+Level/\hyperlink{CCommunicate_8h}{C\+Communicate.\+h}\item 
+Robot\+Low\+Level/\hyperlink{CCommunicate_8cpp}{C\+Communicate.\+cpp}\end{DoxyCompactItemize}

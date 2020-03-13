@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>13</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>130</x>
+      <y>416</y>
+      <w>923</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>*RobotArmController*
+
+CALIBRATION
+
+EMERGENCY STOP
+
+MOVE
+
+IDLE
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>130</x>
+      <y>195</y>
+      <w>923</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;subsystem&gt;&gt;/
+*LynxMotion AL5D*
+
+
+STOP
+
+MOVE
+
+IDLE
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>546</y>
+      <w>91</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;50.0;40.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>494</y>
+      <w>676</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;50.0;240.0;50.0;240.0;80.0;340.0;80.0;340.0;10.0;500.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>286</y>
+      <w>819</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;70.0;130.0;70.0;130.0;40.0;340.0;40.0;340.0;70.0;450.0;70.0;450.0;10.0;610.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>364</y>
+      <w>156</w>
+      <h>221</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+Serial
+[0..17.8ms]</panel_attributes>
+    <additional_attributes>10.0;150.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>312</y>
+      <w>312</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>[0..65535ms] </panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>663</x>
+      <y>364</y>
+      <w>130</w>
+      <h>221</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+moveDone</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>793</x>
+      <y>364</y>
+      <w>130</w>
+      <h>169</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+
+Serial
+[0..2.1ms]</panel_attributes>
+    <additional_attributes>10.0;110.0;20.0;10.0</additional_attributes>
+  </element>
+</diagram>

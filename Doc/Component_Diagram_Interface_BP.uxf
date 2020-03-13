@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>320</x>
+      <y>560</y>
+      <w>710</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+&lt;&lt;artifact&gt;&gt;
+LynxMotion AL5D</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>480</y>
+      <w>70</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-[Serial]</panel_attributes>
+    <additional_attributes>30.0;10.0;30.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>340</x>
+      <y>410</y>
+      <w>240</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+RobotHighLevel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>360</y>
+      <w>940</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=.
+*Device Drivers*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>540</y>
+      <w>940</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=.
+*Hardware Layer*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>770</x>
+      <y>410</y>
+      <w>240</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+RobotLowLevel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>200</y>
+      <w>940</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=.
+*Middleware*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>320</x>
+      <y>370</y>
+      <w>710</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+RobotArmController</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>120</y>
+      <w>330</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=[ROS]-(
+m2= &lt;&lt;ROS::Topic&gt;&gt;
+
+
+
+
+
+
+
+
+  /RobotArmController/Move
+  /RobotArmController/Calibrate
+  /RobotArmController/EmergencyStop
+  /RobotArmController/ProgrammedPosition</panel_attributes>
+    <additional_attributes>20.0;50.0;20.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>270</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=()-[ROS]</panel_attributes>
+    <additional_attributes>20.0;10.0;20.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>90</y>
+      <w>940</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=.
+*Application Layer*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>320</x>
+      <y>100</y>
+      <w>710</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+MotionController</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>470</y>
+      <w>70</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-[Serial]</panel_attributes>
+    <additional_attributes>30.0;100.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>280</y>
+      <w>50</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=)-[ROS]</panel_attributes>
+    <additional_attributes>20.0;20.0;20.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>160</y>
+      <w>200</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=[ROS]-()
+m2=   &lt;&lt;ROS::Topic&gt;&gt;
+
+
+
+
+
+
+   /MotionController/State</panel_attributes>
+    <additional_attributes>20.0;10.0;20.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>430</y>
+      <w>70</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=)-</panel_attributes>
+    <additional_attributes>40.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>430</y>
+      <w>170</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+IExecuteCommand
+fontsize=12</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+</diagram>

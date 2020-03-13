@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>264</x>
+      <y>252</y>
+      <w>252</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>IDLE
+--
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>264</x>
+      <y>468</y>
+      <w>252</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>MOVE
+--
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>744</x>
+      <y>468</y>
+      <w>264</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>EMERGENCY_STOP
+--
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>372</x>
+      <y>132</y>
+      <w>24</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>372</x>
+      <y>132</y>
+      <w>36</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>144</x>
+      <y>324</y>
+      <w>24</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>type=final</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>324</y>
+      <w>132</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>372</y>
+      <w>192</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[IsInstructionValid]
+evMove </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>516</y>
+      <w>264</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+ evStop 
+[ClearInstructionLists]
+</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>312</y>
+      <w>384</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+evStop 
+            [ClearInstructionLists]
+</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0;300.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>372</y>
+      <w>228</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+[MovementCompleted] 
+evMoveDone 
+[ClearInstructionLists]</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>168</x>
+      <y>552</y>
+      <w>204</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+[MovementCompleted] 
+evMoveDone 
+[ClearInstructionLists]</panel_attributes>
+    <additional_attributes>110.0;40.0;110.0;60.0;50.0;60.0;50.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>84</x>
+      <y>96</y>
+      <w>972</w>
+      <h>624</h>
+    </coordinates>
+    <panel_attributes>RobotArmController {Protocol}
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>744</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>CIdleState
+--
++ CIdleState(rEvent: CEvent, 
+spConfiguration: CConfiguration)
+--
+-m_Event: CEvent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>744</y>
+      <w>200</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>CCalibrateState
+--
++ CCalibrateState(rEvent: CEvent, 
+spConfiguration: CConfiguration)
+--
+-m_Event: CEvent
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>744</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>CMoveState
+--
++ CMoveState(rEvent: CEvent, 
+spConfiguration: CConfiguration)
+--
+-m_event: CEvent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>544</x>
+      <y>744</y>
+      <w>192</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>CStopState
+--
++ CStopState(rEvent: CEvent, 
+spConfiguration: CConfiguration)
+--
+-m_Event: CEvent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>592</y>
+      <w>400</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>IRobotStates
+--
+/+ Entry() = 0: void/
+/+ Do() = 0: void/
+/+ Exit() = 0: void/
++ HandleEvent(rEvent: CEvent&amp;, rContext: CRobotContext&amp;): void
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>368</y>
+      <w>400</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>CRobotContext
+--
++ Run(): void
++ SetState(sp_state: IRobotState): void
++ MoveCallback(Package::Move): void
++ CalibrateCallback(Package::Move): void
++ EmergencyStopCallback(Package::EmergencyStop): void
++ ProgrammedPositionCallback(Package::ProgrammedPosition): void
+--
+- GetHighestDuration(rEvent: CEvent): double
+
+- m_nodeHandle: ros::NodeHandle
+- m_moveSubcriber: ros::Subscriber
+- m_calibrateSubscriber: ros::Subscriber
+- m_emergencyStopSubcriber: ros::Subscriber
+- m_programmedPositionSubcriber: ros::Subscriber
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>632</x>
+      <y>160</y>
+      <w>288</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>CEvent
+--
++ CEvent(eventType: eEventType)
++ CEvent(eventType: eEventType, 
+preemptive: bool, 
+servoInstructions[0..*]: CServoinstruction)
++ IsPreemptive(): bool
++ GetEventType(): eEventType
++ GetServoInstructions(): CServoInstruction[0..*]
+--
+- m_isPreemptive: bool 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>152</x>
+      <y>584</y>
+      <w>240</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+_CStatePublisher_
+--
+- CStatePublisher()
+_+ GetInstance(): CStatePublisher_
++ PublishState(state: ePublishableStates)
+--
+- m_nodeHandle: ros::NodeHandle
+- m_publisher: ros::Publisher </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>632</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>280</y>
+      <w>176</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m_preemptiveEventQueue,
+m_queuedEventQueue
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>416</x>
+      <y>688</y>
+      <w>240</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>280.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>688</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>688</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>704</x>
+      <y>672</y>
+      <w>368</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;440.0;30.0;440.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>904</x>
+      <y>440</y>
+      <w>88</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0;90.0;210.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>904</x>
+      <y>408</y>
+      <w>208</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+  m_spCurrentState</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;280.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>904</x>
+      <y>368</y>
+      <w>320</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m_spConfiguration: CConfiguration
+</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>912</x>
+      <y>192</y>
+      <w>312</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+
+m_spServoInstructions: 
+CServoInstruction
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>370.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>32</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>eEventType
+--
+IDLE,
+MOVE,
+CALIBRATE,
+EMERGENCY_STOP</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>104</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+
+
+ m_eventType
+m1=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>216</y>
+      <w>176</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0;10.0;490.0;50.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>112</x>
+      <y>544</y>
+      <w>104</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m_pInstance</panel_attributes>
+    <additional_attributes>110.0;50.0;110.0;20.0;10.0;20.0;10.0;120.0;50.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>456</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ePublishableStates
+--
+PUBLISH_IDLE,
+PUBLISH_MOVE,
+PUBLISH_CALIBRATE,
+PUBLISH_EMERGENCY_STOP</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>264</x>
+      <y>528</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>24</y>
+      <w>1056</w>
+      <h>872</h>
+    </coordinates>
+    <panel_attributes>lt=.
+&lt;&lt;executable&gt;&gt;
+*RobotArmController*
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>424</x>
+      <y>824</y>
+      <w>800</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+
+
+m_spConfiguration: CConfiguration</panel_attributes>
+    <additional_attributes>980.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1032</x>
+      <y>824</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>824</x>
+      <y>824</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>824</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>712</x>
+      <y>704</y>
+      <w>512</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>620.0;20.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>912</x>
+      <y>704</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>776</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

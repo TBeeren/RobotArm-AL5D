@@ -1,0 +1,111 @@
+\hypertarget{classCRobotContext}{}\section{C\+Robot\+Context Class Reference}
+\label{classCRobotContext}\index{C\+Robot\+Context@{C\+Robot\+Context}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCRobotContext_af50652269de0b3977920d97345ac3606}{Run} ()
+\begin{DoxyCompactList}\small\item\em The Run function runs the state machine so it handles all the events in its queue, afterwards it will stay waiting for new events to be created by functions to be called by ros. \end{DoxyCompactList}\item 
+void \hyperlink{classCRobotContext_a34c126d70c235c1fdd60d028aea523d7}{Set\+State} (std\+::shared\+\_\+ptr$<$ \hyperlink{classIRobotStates}{I\+Robot\+States} $>$ sp\+\_\+state)
+\begin{DoxyCompactList}\small\item\em Sets the state of the Context, in doing so it goes through the exit action of the previous state, the entry action of the new state and into the do activity of the new state. All in that order. \end{DoxyCompactList}\item 
+void \hyperlink{classCRobotContext_a0c691e094641e2e424dce4505a5db275}{Move\+Callback} (const Robot\+Arm\+Controller\+::\+Move\+::\+Const\+Ptr \&move\+Msg)
+\begin{DoxyCompactList}\small\item\em The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Move ros topic. \end{DoxyCompactList}\item 
+void \hyperlink{classCRobotContext_a64c5bcd86ffe2d1dff1354187f8e165b}{Calibrate\+Callback} (const Robot\+Arm\+Controller\+::\+Move\+::\+Const\+Ptr \&calibrate\+Msg)
+\begin{DoxyCompactList}\small\item\em The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Calibrate ros topic. \end{DoxyCompactList}\item 
+void \hyperlink{classCRobotContext_ab4f5e962e8b722b8e844e41c64831ea9}{Emergency\+Stop\+Callback} (const Robot\+Arm\+Controller\+::\+Emergency\+Stop\+::\+Const\+Ptr \&stop\+Msg)
+\begin{DoxyCompactList}\small\item\em The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Emergency\+Stop ros topic. \end{DoxyCompactList}\item 
+void \hyperlink{classCRobotContext_a9ab9301b43253d237984667c1b586cec}{Programmed\+Position\+Callback} (const Robot\+Arm\+Controller\+::\+Programmed\+Position\+::\+Const\+Ptr \&programmed\+Position\+Msg)
+\begin{DoxyCompactList}\small\item\em The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Programmed\+Position ros topic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCRobotContext_a64c5bcd86ffe2d1dff1354187f8e165b}\label{classCRobotContext_a64c5bcd86ffe2d1dff1354187f8e165b}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Calibrate\+Callback@{Calibrate\+Callback}}
+\index{Calibrate\+Callback@{Calibrate\+Callback}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Calibrate\+Callback()}{CalibrateCallback()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Calibrate\+Callback (\begin{DoxyParamCaption}\item[{const Robot\+Arm\+Controller\+::\+Move\+::\+Const\+Ptr \&}]{calibrate\+Msg }\end{DoxyParamCaption})}
+
+
+
+The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Calibrate ros topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em calibrate\+Msg} & a message containing instructions for the individual servos of the robotarm. these values will be used to calibrate new boundries \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCRobotContext_ab4f5e962e8b722b8e844e41c64831ea9}\label{classCRobotContext_ab4f5e962e8b722b8e844e41c64831ea9}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Emergency\+Stop\+Callback@{Emergency\+Stop\+Callback}}
+\index{Emergency\+Stop\+Callback@{Emergency\+Stop\+Callback}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Emergency\+Stop\+Callback()}{EmergencyStopCallback()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Emergency\+Stop\+Callback (\begin{DoxyParamCaption}\item[{const Robot\+Arm\+Controller\+::\+Emergency\+Stop\+::\+Const\+Ptr \&}]{stop\+Msg }\end{DoxyParamCaption})}
+
+
+
+The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Emergency\+Stop ros topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stop\+Msg} & an empty message \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCRobotContext_a0c691e094641e2e424dce4505a5db275}\label{classCRobotContext_a0c691e094641e2e424dce4505a5db275}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Move\+Callback@{Move\+Callback}}
+\index{Move\+Callback@{Move\+Callback}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Move\+Callback()}{MoveCallback()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Move\+Callback (\begin{DoxyParamCaption}\item[{const Robot\+Arm\+Controller\+::\+Move\+::\+Const\+Ptr \&}]{move\+Msg }\end{DoxyParamCaption})}
+
+
+
+The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Move ros topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em move\+Msg} & a message containing instructions for the individual servos of the robotarm \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCRobotContext_a9ab9301b43253d237984667c1b586cec}\label{classCRobotContext_a9ab9301b43253d237984667c1b586cec}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Programmed\+Position\+Callback@{Programmed\+Position\+Callback}}
+\index{Programmed\+Position\+Callback@{Programmed\+Position\+Callback}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Programmed\+Position\+Callback()}{ProgrammedPositionCallback()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Programmed\+Position\+Callback (\begin{DoxyParamCaption}\item[{const Robot\+Arm\+Controller\+::\+Programmed\+Position\+::\+Const\+Ptr \&}]{programmed\+Position\+Msg }\end{DoxyParamCaption})}
+
+
+
+The callback function which will be called when a message gets posted on the /\+Robot\+Arm\+Controller/\+Programmed\+Position ros topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em programmed\+Position\+Msg} & a message containing a string to set pre defined positions \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCRobotContext_af50652269de0b3977920d97345ac3606}\label{classCRobotContext_af50652269de0b3977920d97345ac3606}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Run@{Run}}
+\index{Run@{Run}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The Run function runs the state machine so it handles all the events in its queue, afterwards it will stay waiting for new events to be created by functions to be called by ros. 
+
+\mbox{\Hypertarget{classCRobotContext_a34c126d70c235c1fdd60d028aea523d7}\label{classCRobotContext_a34c126d70c235c1fdd60d028aea523d7}} 
+\index{C\+Robot\+Context@{C\+Robot\+Context}!Set\+State@{Set\+State}}
+\index{Set\+State@{Set\+State}!C\+Robot\+Context@{C\+Robot\+Context}}
+\subsubsection{\texorpdfstring{Set\+State()}{SetState()}}
+{\footnotesize\ttfamily void C\+Robot\+Context\+::\+Set\+State (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{classIRobotStates}{I\+Robot\+States} $>$}]{sp\+\_\+state }\end{DoxyParamCaption})}
+
+
+
+Sets the state of the Context, in doing so it goes through the exit action of the previous state, the entry action of the new state and into the do activity of the new state. All in that order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp\+\_\+state} & a shared pointer to the new state for this context \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{CRobotContext_8h}{C\+Robot\+Context.\+h}\item 
+C\+Robot\+Context.\+cpp\end{DoxyCompactItemize}
