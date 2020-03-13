@@ -20,18 +20,22 @@ CEvent::CEvent(eEventType eventType, bool preemptive, std::vector<std::shared_pt
         case IDLE:
         {
             ROS_DEBUG("EVENT: {evIDLE}");
+            break;
         }
         case MOVE:
         {
             ROS_DEBUG("EVENT: {evMOVE}");
+            break;
         }
         case CALIBRATE:
         {
             ROS_DEBUG("EVENT: {evCALIBRATE}");
+            break;
         }
         case EMERGENCY_STOP:
         {
             ROS_DEBUG("EVENT: {evEMERGENCY_STOP}");
+            break;
         }
     }
 }
