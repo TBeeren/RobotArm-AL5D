@@ -1,0 +1,120 @@
+\hypertarget{classIExecuteCommand}{}\section{I\+Execute\+Command Class Reference}
+\label{classIExecuteCommand}\index{I\+Execute\+Command@{I\+Execute\+Command}}
+
+
+Inheritance diagram for I\+Execute\+Command\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classIExecuteCommand__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classIExecuteCommand_a9aaabaf7284c9d295c6e2fdfc1445ca4}{Stop} ()=0
+\begin{DoxyCompactList}\small\item\em This function will be called to stop communication to the robotarm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIExecuteCommand_a266571b3fc97e79be6e00b0df4c5a4ac}{Write} (const std\+::string \&r\+Message)=0
+\begin{DoxyCompactList}\small\item\em The write function is called to write a string message to the robotarm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIExecuteCommand_a0f05e1cf668740504e36de8f662c0864}{Append\+Instruction} (e\+Command e\+Command, int8\+\_\+t servo, int64\+\_\+t position, int64\+\_\+t speed, int64\+\_\+t duration)=0
+\begin{DoxyCompactList}\small\item\em the Append\+Instruction function adds an instruction to the list of instructions to send to the robotarm \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIExecuteCommand_a8180d6931ffae55f04f9984d45a9c99f}{Execute} ()=0
+\begin{DoxyCompactList}\small\item\em The execute function writes the stored instructions as a message to the robotarm. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classIExecuteCommand_a34d2dc6186873e0f6f039fd4b41e414a}{Clear\+Lists} ()=0
+\begin{DoxyCompactList}\small\item\em The clearlists function clears all the previously appended instructions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIExecuteCommand_a0f05e1cf668740504e36de8f662c0864}\label{classIExecuteCommand_a0f05e1cf668740504e36de8f662c0864}} 
+\index{I\+Execute\+Command@{I\+Execute\+Command}!Append\+Instruction@{Append\+Instruction}}
+\index{Append\+Instruction@{Append\+Instruction}!I\+Execute\+Command@{I\+Execute\+Command}}
+\subsubsection{\texorpdfstring{Append\+Instruction()}{AppendInstruction()}}
+{\footnotesize\ttfamily virtual void I\+Execute\+Command\+::\+Append\+Instruction (\begin{DoxyParamCaption}\item[{e\+Command}]{e\+Command,  }\item[{int8\+\_\+t}]{servo,  }\item[{int64\+\_\+t}]{position,  }\item[{int64\+\_\+t}]{speed,  }\item[{int64\+\_\+t}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+the Append\+Instruction function adds an instruction to the list of instructions to send to the robotarm 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Command} & the type of command to send to the servo \\
+\hline
+{\em servo} & the servo to control \\
+\hline
+{\em position} & the position to which the servo has to travel in P\+WM \\
+\hline
+{\em speed} & the maximum speed of the movement \\
+\hline
+{\em duration} & the duration of the movement \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classCCommandAL5D_ae8b75aec364029b7cb65959325b6b9f7}{C\+Command\+A\+L5D}.
+
+\mbox{\Hypertarget{classIExecuteCommand_a34d2dc6186873e0f6f039fd4b41e414a}\label{classIExecuteCommand_a34d2dc6186873e0f6f039fd4b41e414a}} 
+\index{I\+Execute\+Command@{I\+Execute\+Command}!Clear\+Lists@{Clear\+Lists}}
+\index{Clear\+Lists@{Clear\+Lists}!I\+Execute\+Command@{I\+Execute\+Command}}
+\subsubsection{\texorpdfstring{Clear\+Lists()}{ClearLists()}}
+{\footnotesize\ttfamily virtual void I\+Execute\+Command\+::\+Clear\+Lists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The clearlists function clears all the previously appended instructions. 
+
+
+
+Implemented in \hyperlink{classCCommandAL5D_a46f133aa4b243af59e02f2cc23b12aa3}{C\+Command\+A\+L5D}.
+
+\mbox{\Hypertarget{classIExecuteCommand_a8180d6931ffae55f04f9984d45a9c99f}\label{classIExecuteCommand_a8180d6931ffae55f04f9984d45a9c99f}} 
+\index{I\+Execute\+Command@{I\+Execute\+Command}!Execute@{Execute}}
+\index{Execute@{Execute}!I\+Execute\+Command@{I\+Execute\+Command}}
+\subsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily virtual void I\+Execute\+Command\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The execute function writes the stored instructions as a message to the robotarm. 
+
+
+
+Implemented in \hyperlink{classCCommandAL5D_ac225e1c103a802a9276f201c94281ae2}{C\+Command\+A\+L5D}.
+
+\mbox{\Hypertarget{classIExecuteCommand_a9aaabaf7284c9d295c6e2fdfc1445ca4}\label{classIExecuteCommand_a9aaabaf7284c9d295c6e2fdfc1445ca4}} 
+\index{I\+Execute\+Command@{I\+Execute\+Command}!Stop@{Stop}}
+\index{Stop@{Stop}!I\+Execute\+Command@{I\+Execute\+Command}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily virtual void I\+Execute\+Command\+::\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This function will be called to stop communication to the robotarm. 
+
+
+
+Implemented in \hyperlink{classCCommandAL5D_a3cd260bd7bf8b4aa72dacc1d1ef2d38b}{C\+Command\+A\+L5D}.
+
+\mbox{\Hypertarget{classIExecuteCommand_a266571b3fc97e79be6e00b0df4c5a4ac}\label{classIExecuteCommand_a266571b3fc97e79be6e00b0df4c5a4ac}} 
+\index{I\+Execute\+Command@{I\+Execute\+Command}!Write@{Write}}
+\index{Write@{Write}!I\+Execute\+Command@{I\+Execute\+Command}}
+\subsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily virtual void I\+Execute\+Command\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{r\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The write function is called to write a string message to the robotarm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r\+Message} & the string which will be sent to the robotarm \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classCCommandAL5D_a308c945d4ed4009c85158a72e5db1bd5}{C\+Command\+A\+L5D}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Low\+Level/\hyperlink{IExecuteCommand_8h}{I\+Execute\+Command.\+h}\end{DoxyCompactItemize}

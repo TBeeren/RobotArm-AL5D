@@ -13,6 +13,7 @@ SET(SOURCES
 )
 
 add_library(RobotHighLevel ${SOURCES})
+target_compile_options(RobotHighLevel PRIVATE -Wall -Wextra)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

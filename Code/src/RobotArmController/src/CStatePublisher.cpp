@@ -1,24 +1,32 @@
 #include "CStatePublisher.h"
 #include "RobotArmController/State.h"
 
+/*static*/ CStatePublisher* CStatePublisher::m_pInstance = nullptr;
+
 CStatePublisher::CStatePublisher()
 : m_nodeHandle()
-, m_publisher(m_nodeHandle.advertise<RobotArmController::State>("\\MotionController\\State",1000))
 {
+    m_statePublisher = m_nodeHandle.advertise<RobotArmController::State>("/RobotArmController/BehaviouralState",1000);
+    m_protocolStatePublisher = m_nodeHandle.advertise<RobotArmController::State>("/RobotArmController/ProtocolState",1000);
 }
 
 CStatePublisher::~CStatePublisher()
 {
+    delete m_pInstance;
 }
 
-/*static*/ CStatePublisher CStatePublisher::GetInstance()
+/*static*/ CStatePublisher* CStatePublisher::GetInstance()
 {
-    static CStatePublisher statePublisher;
-    return statePublisher;
+    if (m_pInstance == nullptr)
+    {
+        m_pInstance = new CStatePublisher;
+    }
+    return m_pInstance;
 }
 
 void CStatePublisher::PublishState(ePublishableStates state)
 {
+
     RobotArmController::State stateMessage;
     switch (state)
     {
@@ -48,5 +56,45 @@ void CStatePublisher::PublishState(ePublishableStates state)
             break;
         }
     }
-    m_publisher.publish(stateMessage);
+    m_statePublisher.publish(stateMessage);
+
+}
+
+void CStatePublisher::PublishProtocolState(ePublishableStates state)
+{
+
+    RobotArmController::State stateMessage;
+    switch (state)
+    {
+    case PUBLISH_IDLE:
+        {
+            stateMessage.State = "Idle";
+            ROS_INFO("STATE: {IDLE}");
+            break;
+        }
+    case PUBLISH_MOVE:
+        {
+            stateMessage.State = "Move";
+            ROS_INFO("STATE: {MOVE}");
+            break;
+        }
+    case PUBLISH_CALIBRATE:
+        {
+            stateMessage.State = "Move";
+            ROS_INFO("STATE: {MOVE}");
+            break;
+        }
+    case PUBLISH_EMERGENCY_STOP:
+        {
+            stateMessage.State = "Emergency Stop";
+            ROS_INFO("STATE: {EMERGENCY_STOP}");
+            break;
+        } 
+    default:
+        {
+            break;
+        }
+    }
+    m_protocolStatePublisher.publish(stateMessage);
+
 }

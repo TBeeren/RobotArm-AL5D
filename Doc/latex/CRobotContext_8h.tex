@@ -1,0 +1,44 @@
+\hypertarget{CRobotContext_8h}{}\section{C\+Robot\+Context.\+h File Reference}
+\label{CRobotContext_8h}\index{C\+Robot\+Context.\+h@{C\+Robot\+Context.\+h}}
+
+
+The \hyperlink{classCRobotContext}{C\+Robot\+Context} is the context for the state machine which controlls the robot arm through its states of moving, idling, calibrating, and stopping. It also holds a nodehandle with which it subscribes to ros topics on which instructions get published.  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}C\+Event.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Robot\+Arm\+Controller/\+Move.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Robot\+Arm\+Controller/\+Emergency\+Stop.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Robot\+Arm\+Controller/\+Programmed\+Position.\+h\char`\"{}}\newline
+Include dependency graph for C\+Robot\+Context.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{CRobotContext_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classCRobotContext}{C\+Robot\+Context}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCRobotContext}{C\+Robot\+Context} is the context for the state machine which controlls the robot arm through its states of moving, idling, calibrating, and stopping. It also holds a nodehandle with which it subscribes to ros topics on which instructions get published. 
+
+\begin{DoxyAuthor}{Author}
+Evren Kilic (\href{mailto:ET.Kilic@student.han.nl}{\tt E\+T.\+Kilic@student.\+han.\+nl}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+05-\/03-\/2020
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2020 
+\end{DoxyCopyright}

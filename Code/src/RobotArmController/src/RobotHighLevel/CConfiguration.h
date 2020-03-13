@@ -1,7 +1,7 @@
 /**
  * @file CConfiguration.h
  * @author Tim Beeren (T.Beeren1@student.han.nl)
- * @brief 
+ * @brief The configuration class holds the calibrated values for every servo
  * @version 0.1
  * @date 06-03-2020
  * 
@@ -32,10 +32,17 @@ enum eServos
     UNKNOWN_SERVO = 6
 };
 
+enum eProgrammedPosition
+{
+    PARK,
+    READY,
+    STRAIGHT
+};
+
 class CConfiguration
 {
 public:
-    CConfiguration(std::shared_ptr<CConfiguration> spConfiguration);
+    CConfiguration();
     ~CConfiguration();
 
     // Default configuration
@@ -50,11 +57,37 @@ public:
     std::map<eServos, std::vector<uint16_t>> configuredServos;
 
     // Methods
-    void ExecuteMovement();
-    void Write(eServos eServo, uint16_t minValue, uint16_t maxValue);
-    
+    /**
+     * @brief Writes calibration values for a gives servo
+     * 
+     * @param eServo the Servo onto which the calibration implies
+     * @param value the value of the calibration
+     */
+    void Write(eServos eServo, uint16_t value);
+    /**
+     * @brief Gets the minimal pwm value for a given servo
+     * 
+     * @param eServo the Servo for which to get the minimal pwm value
+     * @return uint16_t the minimal pwm value
+     */
+    uint16_t GetMinPWM(eServos eServo);
+    /**
+     * @brief Gets the maximum pwm value for a given servo
+     * 
+     * @param eServo the Servo for which to get the maximum pwm value
+     * @return uint16_t the maximum pwm value
+     */
+    uint16_t GetMaxPWM(eServos eServo);
+    /**
+     * @brief translates a recieved string into a programmed position if one is known
+     * 
+     * @param programmedPositionString the string to be translated into a programmed position
+     * @return eProgrammedPosition the programmed position that was found matching the string, if any was found
+     */
+    eProgrammedPosition StringToProgrammedPosition(std::string programmedPositionString);
+
 private:
-    std::shared_ptr<CConfiguration> m_spConfiguration;
+    std::map<eProgrammedPosition, std::string> programmedPositions;
 };
 
 #endif /*CCONFIGURATION_H*/

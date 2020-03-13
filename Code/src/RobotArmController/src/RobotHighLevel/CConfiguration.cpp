@@ -10,36 +10,33 @@
  */
 
 #include "CConfiguration.h"
+#include <iostream>
 
 //Anonymous namespace
 namespace 
 {
-    constexpr uint16_t minBaseValue = 0; 
-    constexpr uint16_t maxBaseValue = 1023;
-    constexpr uint16_t minShoulderValue = 0; 
-    constexpr uint16_t maxShoulderValue = 1023;
-    constexpr uint16_t minElbowValue = 0; 
-    constexpr uint16_t maxElbowValue = 1023;
-    constexpr uint16_t minWristValue = 0; 
-    constexpr uint16_t maxWristValue = 1023;
-    constexpr uint16_t minGripperValue = 0; 
-    constexpr uint16_t maxGripperValue = 1023;
-    constexpr uint16_t minWristRotateValue = 0;
-    constexpr uint16_t maxWristRotateValue = 1023;
+    constexpr uint16_t minPWMValue = 1250; 
+    constexpr uint16_t maxPWMValue = 1750;
 
     constexpr const uint8_t minValueVectorIndex = 0;
     constexpr const uint8_t maxValueVectorIndex = 1;
 }
 
-CConfiguration::CConfiguration(std::shared_ptr<CConfiguration> spConfiguration)
-: m_spConfiguration(spConfiguration)
-, m_baseConfig(minBaseValue, maxBaseValue)
-, m_shoulderConfig(minShoulderValue, maxShoulderValue)
-, m_elbowConfig(minElbowValue, maxElbowValue)
-, m_wristConfig(minWristValue, maxWristValue)
-, m_gripperConfig(minGripperValue, maxGripperValue)
-, m_wristRotateConfig(minGripperValue, maxGripperValue)
+CConfiguration::CConfiguration()
+: m_baseConfig(minPWMValue, maxPWMValue)
+, m_shoulderConfig(minPWMValue, maxPWMValue)
+, m_elbowConfig(minPWMValue, maxPWMValue)
+, m_wristConfig(minPWMValue, maxPWMValue)
+, m_gripperConfig(minPWMValue, maxPWMValue)
+, m_wristRotateConfig(minPWMValue, maxPWMValue)
 {
+    programmedPositions =
+    {
+        {eProgrammedPosition::PARK, "park"},
+        {eProgrammedPosition::READY, "ready"},
+        {eProgrammedPosition::STRAIGHT, "straight"}
+    };
+
     // Initialising the map with servo configuration.
     configuredServos =
     {
@@ -57,54 +54,199 @@ CConfiguration::~CConfiguration()
 }
 
 
-void CConfiguration::Write(eServos eServo, uint16_t minValue, uint16_t maxValue)
+void CConfiguration::Write(eServos eServo, uint16_t value)
 {
     switch (eServo)
     {
         case eServos::BASE:
         {
-            m_baseConfig[minValueVectorIndex] = minValue;
-            m_baseConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_baseConfig[minValueVectorIndex])
+            {
+                m_baseConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_baseConfig[maxValueVectorIndex])
+            {
+                m_baseConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::SHOULDER:
         {
-            m_shoulderConfig[minValueVectorIndex] = minValue;
-            m_shoulderConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_shoulderConfig[minValueVectorIndex])
+            {
+                m_shoulderConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_shoulderConfig[maxValueVectorIndex])
+            {
+                m_shoulderConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::ELBOW:
         {
-            m_elbowConfig[minValueVectorIndex] = minValue;
-            m_elbowConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_elbowConfig[minValueVectorIndex])
+            {
+                m_elbowConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_elbowConfig[maxValueVectorIndex])
+            {
+                m_elbowConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::WRIST:
         {
-            m_wristConfig[minValueVectorIndex] = minValue;
-            m_wristConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_wristConfig[minValueVectorIndex])
+            {
+                m_wristConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_wristConfig[maxValueVectorIndex])
+            {
+                m_wristConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::GRIPPER:
         {
-            m_gripperConfig[minValueVectorIndex] = minValue;
-            m_gripperConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_gripperConfig[minValueVectorIndex])
+            {
+                m_gripperConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_gripperConfig[maxValueVectorIndex])
+            {
+                m_gripperConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::WRIST_ROTATE:
         {
-            m_wristConfig[minValueVectorIndex] = minValue;
-            m_wristConfig[maxValueVectorIndex] = maxValue;
+            if(value < m_wristRotateConfig[minValueVectorIndex])
+            {
+                m_wristRotateConfig[minValueVectorIndex] = value;
+            }
+            else if(value > m_wristRotateConfig[maxValueVectorIndex])
+            {
+                m_wristRotateConfig[maxValueVectorIndex] = value;
+            }
             break;
         }
         case eServos::UNKNOWN_SERVO:
         {
-            throw "Servo type is unknown! Please check your message on syntax";
+            std::cout << " [Warning]-> Servo type is unknown! Please check your message on syntax" << std::endl;
             break;
         }
         default:
         {
             break;
+        }
+    }
+}
+
+uint16_t CConfiguration::GetMinPWM(eServos eServo)
+{
+    uint16_t returnValue;
+    switch (eServo)
+    {
+        case eServos::BASE:
+        {
+            returnValue = m_baseConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::SHOULDER:
+        {
+            returnValue = m_shoulderConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::ELBOW:
+        {
+            returnValue = m_elbowConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::WRIST:
+        {
+            returnValue = m_wristConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::GRIPPER:
+        {
+            returnValue = m_gripperConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::WRIST_ROTATE:
+        {
+            returnValue = m_wristRotateConfig[minValueVectorIndex];
+            break;
+        }
+        case eServos::UNKNOWN_SERVO:
+        {
+            std::cout << "Servo type is unknown! Please check your message on syntax" << std::endl;
+            break;
+        }
+        default:
+        {
+            std::cout << "Servo type is unknown! Please check your message on syntax" << std::endl;
+            break;
+        }
+    }
+    return returnValue;
+}
+
+uint16_t CConfiguration::GetMaxPWM(eServos eServo)
+{
+    uint16_t returnValue;
+    switch (eServo)
+    {
+        case eServos::BASE:
+        {
+            returnValue = m_baseConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::SHOULDER:
+        {
+            returnValue = m_shoulderConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::ELBOW:
+        {
+            returnValue = m_elbowConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::WRIST:
+        {
+            returnValue = m_wristConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::GRIPPER:
+        {
+            returnValue = m_gripperConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::WRIST_ROTATE:
+        {
+            returnValue = m_wristRotateConfig[maxValueVectorIndex];
+            break;
+        }
+        case eServos::UNKNOWN_SERVO:
+        {
+            std::cout << "Servo type is unknown! Please check your message on syntax" << std::endl;
+            break;
+        }
+        default:
+        {
+            std::cout << "Servo type is unknown! Please check your message on syntax" << std::endl;
+            break;
+        }
+    }
+    return returnValue;
+}
+
+eProgrammedPosition CConfiguration::StringToProgrammedPosition(std::string programmedPositionString)
+{
+    for(auto programmedPosition : programmedPositions)
+    {
+        if(programmedPosition.second == programmedPositionString)
+        {
+            return programmedPosition.first;
         }
     }
 }

@@ -1,0 +1,7 @@
+<map id="RobotHighLevel/CMove.cpp" name="RobotHighLevel/CMove.cpp">
+<area shape="rect" id="node2" href="$CMove_8h.html" title="The CMove class offers functions to calculate degrees to PWM and to then send a command to the robota..." alt="" coords="203,87,277,114"/>
+<area shape="rect" id="node9" href="$CServoInstruction_8h.html" title="CServoinstruction is a class that holds the instructions for a specfic servo within the robotarm..." alt="" coords="523,87,674,114"/>
+<area shape="rect" id="node11" href="$CCommandAL5D_8h.html" title="The CommandAL5D class is a realistation of the IExecuteCommand. It is reponsible for commanding the A..." alt="" coords="301,80,499,121"/>
+<area shape="rect" id="node5" href="$IExecuteCommand_8h.html" title="The ExecuteCommand interfaces gives higher level drivers the ability to send instructions to the robo..." alt="" coords="29,169,209,211"/>
+<area shape="rect" id="node7" href="$CConfiguration_8h.html" title="The configuration class holds the calibrated values for every servo. " alt="" coords="335,177,455,203"/>
+</map>

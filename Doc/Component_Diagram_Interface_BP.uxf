@@ -103,9 +103,9 @@ RobotArmController</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>330</x>
-      <y>130</y>
+      <y>120</y>
       <w>330</w>
-      <h>180</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=[ROS]-(
 m2= &lt;&lt;ROS::Topic&gt;&gt;
@@ -116,10 +116,12 @@ m2= &lt;&lt;ROS::Topic&gt;&gt;
 
 
 
-  \RobotArmController\Move
-  \RobotArmController\EmergencyStop
-  \RobotArmController\ProgrammedPosition</panel_attributes>
-    <additional_attributes>20.0;40.0;20.0;130.0</additional_attributes>
+
+  /RobotArmController/Move
+  /RobotArmController/Calibrate
+  /RobotArmController/EmergencyStop
+  /RobotArmController/ProgrammedPosition</panel_attributes>
+    <additional_attributes>20.0;50.0;20.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -195,7 +197,7 @@ m2=   &lt;&lt;ROS::Topic&gt;&gt;
 
 
 
-   \MotionController\State</panel_attributes>
+   /MotionController/State</panel_attributes>
     <additional_attributes>20.0;10.0;20.0;120.0</additional_attributes>
   </element>
   <element>

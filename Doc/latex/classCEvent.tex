@@ -1,0 +1,46 @@
+\hypertarget{classCEvent}{}\section{C\+Event Class Reference}
+\label{classCEvent}\index{C\+Event@{C\+Event}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCEvent_aa6b4336b0297195331fe226481e54052}\label{classCEvent_aa6b4336b0297195331fe226481e54052}} 
+{\bfseries C\+Event} (e\+Event\+Type event\+Type)
+\item 
+\mbox{\Hypertarget{classCEvent_a58a02cb098fc183f477fcee526bd4e9a}\label{classCEvent_a58a02cb098fc183f477fcee526bd4e9a}} 
+{\bfseries C\+Event} (e\+Event\+Type event\+Type, bool preemptive, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$$>$ servo\+Instructions)
+\item 
+\mbox{\Hypertarget{classCEvent_a96d5a3bb8bd3d79f97fba150741bc47d}\label{classCEvent_a96d5a3bb8bd3d79f97fba150741bc47d}} 
+{\bfseries C\+Event} (const \hyperlink{classCEvent}{C\+Event} \&event)
+\item 
+bool \hyperlink{classCEvent_a82761c13d74df9b3eee88a2ca40e261c}{Is\+Preemptive} ()
+\begin{DoxyCompactList}\small\item\em Returns wether this event is ment to be preemptive or not. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCEvent_a225d9123874708df819aa2f377113ac8}\label{classCEvent_a225d9123874708df819aa2f377113ac8}} 
+e\+Event\+Type {\bfseries Get\+Event\+Type} ()
+\item 
+\mbox{\Hypertarget{classCEvent_a02ff282255e304f3a518cd042e50be0e}\label{classCEvent_a02ff282255e304f3a518cd042e50be0e}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classCServoInstruction}{C\+Servo\+Instruction} $>$ $>$ {\bfseries Get\+Servo\+Instructions} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCEvent_a82761c13d74df9b3eee88a2ca40e261c}\label{classCEvent_a82761c13d74df9b3eee88a2ca40e261c}} 
+\index{C\+Event@{C\+Event}!Is\+Preemptive@{Is\+Preemptive}}
+\index{Is\+Preemptive@{Is\+Preemptive}!C\+Event@{C\+Event}}
+\subsubsection{\texorpdfstring{Is\+Preemptive()}{IsPreemptive()}}
+{\footnotesize\ttfamily bool C\+Event\+::\+Is\+Preemptive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns wether this event is ment to be preemptive or not. 
+
+\begin{DoxyReturn}{Returns}
+true the event is preemptive 
+
+false the event isn\textquotesingle{}t preemptive 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{CEvent_8h}{C\+Event.\+h}\item 
+C\+Event.\+cpp\end{DoxyCompactItemize}

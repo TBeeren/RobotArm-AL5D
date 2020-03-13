@@ -1,0 +1,117 @@
+\hypertarget{classCConfiguration}{}\section{C\+Configuration Class Reference}
+\label{classCConfiguration}\index{C\+Configuration@{C\+Configuration}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCConfiguration_a3d19b67de92d6035f6d99e61828bb895}{Write} (e\+Servos e\+Servo, uint16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes calibration values for a gives servo. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classCConfiguration_a8c403f01f00fa41c5cfa1b7b7fc54643}{Get\+Min\+P\+WM} (e\+Servos e\+Servo)
+\begin{DoxyCompactList}\small\item\em Gets the minimal pwm value for a given servo. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{classCConfiguration_a802c3702798ee1dd456d663530da89d0}{Get\+Max\+P\+WM} (e\+Servos e\+Servo)
+\begin{DoxyCompactList}\small\item\em Gets the maximum pwm value for a given servo. \end{DoxyCompactList}\item 
+e\+Programmed\+Position \hyperlink{classCConfiguration_aeaa35322a42eb0fb16f04d43f98ee9af}{String\+To\+Programmed\+Position} (std\+::string programmed\+Position\+String)
+\begin{DoxyCompactList}\small\item\em translates a recieved string into a programmed position if one is known \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCConfiguration_a645da54104ece59e51075625f2154fa6}\label{classCConfiguration_a645da54104ece59e51075625f2154fa6}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+base\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_a6ad827aa986b7ee1edbb0bb54396e2f4}\label{classCConfiguration_a6ad827aa986b7ee1edbb0bb54396e2f4}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+shoulder\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_a70b950d039f075e4ca742fb3ca2b0af6}\label{classCConfiguration_a70b950d039f075e4ca742fb3ca2b0af6}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+elbow\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_a1a20f4e7ea30bc5d1876a5ee378e050f}\label{classCConfiguration_a1a20f4e7ea30bc5d1876a5ee378e050f}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+wrist\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_a2152fd07d542414360636f1ffd658dd4}\label{classCConfiguration_a2152fd07d542414360636f1ffd658dd4}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+gripper\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_ac07b6f1cc76bc4cd1cba91964c69a3d4}\label{classCConfiguration_ac07b6f1cc76bc4cd1cba91964c69a3d4}} 
+std\+::vector$<$ uint16\+\_\+t $>$ {\bfseries m\+\_\+wrist\+Rotate\+Config}
+\item 
+\mbox{\Hypertarget{classCConfiguration_adb298b77ce31aab113916880beb973e0}\label{classCConfiguration_adb298b77ce31aab113916880beb973e0}} 
+std\+::map$<$ e\+Servos, std\+::vector$<$ uint16\+\_\+t $>$ $>$ {\bfseries configured\+Servos}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCConfiguration_a802c3702798ee1dd456d663530da89d0}\label{classCConfiguration_a802c3702798ee1dd456d663530da89d0}} 
+\index{C\+Configuration@{C\+Configuration}!Get\+Max\+P\+WM@{Get\+Max\+P\+WM}}
+\index{Get\+Max\+P\+WM@{Get\+Max\+P\+WM}!C\+Configuration@{C\+Configuration}}
+\subsubsection{\texorpdfstring{Get\+Max\+P\+W\+M()}{GetMaxPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t C\+Configuration\+::\+Get\+Max\+P\+WM (\begin{DoxyParamCaption}\item[{e\+Servos}]{e\+Servo }\end{DoxyParamCaption})}
+
+
+
+Gets the maximum pwm value for a given servo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Servo} & the Servo for which to get the maximum pwm value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t the maximum pwm value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCConfiguration_a8c403f01f00fa41c5cfa1b7b7fc54643}\label{classCConfiguration_a8c403f01f00fa41c5cfa1b7b7fc54643}} 
+\index{C\+Configuration@{C\+Configuration}!Get\+Min\+P\+WM@{Get\+Min\+P\+WM}}
+\index{Get\+Min\+P\+WM@{Get\+Min\+P\+WM}!C\+Configuration@{C\+Configuration}}
+\subsubsection{\texorpdfstring{Get\+Min\+P\+W\+M()}{GetMinPWM()}}
+{\footnotesize\ttfamily uint16\+\_\+t C\+Configuration\+::\+Get\+Min\+P\+WM (\begin{DoxyParamCaption}\item[{e\+Servos}]{e\+Servo }\end{DoxyParamCaption})}
+
+
+
+Gets the minimal pwm value for a given servo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Servo} & the Servo for which to get the minimal pwm value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t the minimal pwm value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCConfiguration_aeaa35322a42eb0fb16f04d43f98ee9af}\label{classCConfiguration_aeaa35322a42eb0fb16f04d43f98ee9af}} 
+\index{C\+Configuration@{C\+Configuration}!String\+To\+Programmed\+Position@{String\+To\+Programmed\+Position}}
+\index{String\+To\+Programmed\+Position@{String\+To\+Programmed\+Position}!C\+Configuration@{C\+Configuration}}
+\subsubsection{\texorpdfstring{String\+To\+Programmed\+Position()}{StringToProgrammedPosition()}}
+{\footnotesize\ttfamily e\+Programmed\+Position C\+Configuration\+::\+String\+To\+Programmed\+Position (\begin{DoxyParamCaption}\item[{std\+::string}]{programmed\+Position\+String }\end{DoxyParamCaption})}
+
+
+
+translates a recieved string into a programmed position if one is known 
+
+
+\begin{DoxyParams}{Parameters}
+{\em programmed\+Position\+String} & the string to be translated into a programmed position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+e\+Programmed\+Position the programmed position that was found matching the string, if any was found 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCConfiguration_a3d19b67de92d6035f6d99e61828bb895}\label{classCConfiguration_a3d19b67de92d6035f6d99e61828bb895}} 
+\index{C\+Configuration@{C\+Configuration}!Write@{Write}}
+\index{Write@{Write}!C\+Configuration@{C\+Configuration}}
+\subsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily void C\+Configuration\+::\+Write (\begin{DoxyParamCaption}\item[{e\+Servos}]{e\+Servo,  }\item[{uint16\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+Writes calibration values for a gives servo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Servo} & the Servo onto which the calibration implies \\
+\hline
+{\em value} & the value of the calibration \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+High\+Level/\hyperlink{CConfiguration_8h}{C\+Configuration.\+h}\item 
+Robot\+High\+Level/\hyperlink{CConfiguration_8cpp}{C\+Configuration.\+cpp}\end{DoxyCompactItemize}

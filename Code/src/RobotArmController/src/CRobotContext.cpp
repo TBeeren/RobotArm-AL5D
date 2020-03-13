@@ -6,7 +6,7 @@
 
 namespace
 {
-    constexpr const std::chrono::duration<double> WORST_CASE_LATENCY_MILLIS = std::chrono::milliseconds(2300);
+    constexpr const std::chrono::duration<double> WORST_CASE_LATENCY_MILLIS = std::chrono::milliseconds(500);
 }
 
 CRobotContext::CRobotContext()
@@ -48,13 +48,18 @@ void CRobotContext::Run()
             m_queuedEventQueue.pop();
             m_spCurrentState->HandleEvent(event, *this);
         }
+        if(m_preemptiveEventQueue.empty() && m_queuedEventQueue.empty() && (deadline <= std::chrono::system_clock::now()))
+        {
+            CEvent event(IDLE);
+            m_preemptiveEventQueue.push(event);
+        }
         ros::spinOnce();
-    }while(ros::ok);
+    }while(ros::ok());
 }
 
 void CRobotContext::SetState(std::shared_ptr<IRobotStates> sp_state)
 {
-    if(!m_spCurrentState)
+    if(m_spCurrentState != nullptr)
     {
         m_spCurrentState->Exit();
     }
@@ -90,13 +95,23 @@ void CRobotContext::CalibrateCallback(const RobotArmController::Move::ConstPtr& 
     {
         servoInstructions.emplace_back(std::make_shared<CServoInstruction>(static_cast<eServos>(instruction.targetServo), instruction.position, instruction.duration, instruction.speed));
     }
-    CEvent event(MOVE, calibrateMsg->preemptive, servoInstructions);
-    m_queuedEventQueue.push(event);
+    CEvent event(CALIBRATE, calibrateMsg->preemptive, servoInstructions);
+    if(event.IsPreemptive())
+    {
+        m_preemptiveEventQueue.push(event);
+    }
+    else
+    {
+        m_queuedEventQueue.push(event);
+    }
 }
 
 void CRobotContext::EmergencyStopCallback(const RobotArmController::EmergencyStop::ConstPtr& stopMsg)
 {
-    std::shared_ptr<IRobotStates> stopState = std::make_shared<CStopState>();
+    std::vector<std::shared_ptr<CServoInstruction>> dummyInstructions;
+    dummyInstructions.emplace_back(std::make_shared<CServoInstruction>(eServos::UNKNOWN_SERVO, 0, 500, -1));
+    CEvent event(EMERGENCY_STOP, true, dummyInstructions);
+    std::shared_ptr<IRobotStates> stopState = std::make_shared<CStopState>(event, m_spConfiguration);
     SetState(stopState);
 }
 
@@ -106,17 +121,39 @@ void CRobotContext::ProgrammedPositionCallback(const RobotArmController::Program
     {
     case PARK:
     {
-        std::cout<<"TODO: IMPLEMENT PARK"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 70, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), 135, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), -40, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 1000, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     case READY:
     {
-        std::cout<<"TODO: IMPLEMENT READY"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 30, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), 80, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 1000, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     case STRAIGHT:
     {
-        std::cout<<"TODO: IMPLEMENT STRAIGHT"<<std::endl;
+        std::vector<std::shared_ptr<CServoInstruction>> servoInstruction;
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(0), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(1), 10, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(2), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(3), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(4), 0, 1000, -1));
+        servoInstruction.emplace_back(std::make_shared<CServoInstruction>(eServos(5), 0, 1000, -1));
+        CEvent event(MOVE, true, servoInstruction);
+        m_preemptiveEventQueue.push(event);
         break;
     }
     default:

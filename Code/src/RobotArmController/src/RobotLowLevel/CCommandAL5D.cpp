@@ -12,28 +12,24 @@
 #include "CCommandAL5D.h"
 
 #include "CCommunicate.h"
-#include "../RobotHighLevel/CConfiguration.h"
 
 namespace
 {
-    constexpr const int16_t MINIMAL_DEGREES_BASE = -90;
-    constexpr const int16_t MINIMAL_DEGREES_SHOULDER = -30;
-    constexpr const int16_t MINIMAL_DEGREES_ELBOW = 0;
-    constexpr const int16_t MINIMAL_DEGREES_WRIST = -90;
-    constexpr const int16_t MINIMAL_DEGREES_WRIST_ROTATE = -90;
+    constexpr const int16_t MINIMAL_DEGREES_BASE = 500;
+    constexpr const int16_t MINIMAL_DEGREES_SHOULDER = 500;
+    constexpr const int16_t MINIMAL_DEGREES_ELBOW = 500;
+    constexpr const int16_t MINIMAL_DEGREES_WRIST = 500;
+    constexpr const int16_t MINIMAL_DEGREES_WRIST_ROTATE = 500;
 
-    constexpr const int16_t MAXIMAL_DEGREES_BASE = 90;
-    constexpr const int16_t MAXIMAL_DEGREES_SHOULDER = 90;
-    constexpr const int16_t MAXIMAL_DEGREES_ELBOW = 135;
-    constexpr const int16_t MAXIMAL_DEGREES_WRIST = 90;
-    constexpr const int16_t MAXIMAL_DEGREES_WRIST_ROTATE = -90;
+    constexpr const int16_t MAXIMAL_DEGREES_BASE = 2500;
+    constexpr const int16_t MAXIMAL_DEGREES_SHOULDER = 2500;
+    constexpr const int16_t MAXIMAL_DEGREES_ELBOW = 2500;
+    constexpr const int16_t MAXIMAL_DEGREES_WRIST = 2500;
+    constexpr const int16_t MAXIMAL_DEGREES_WRIST_ROTATE = 2500;
 }
 
 CCommandAL5D::CCommandAL5D()
 : m_spCommunicate(std::make_shared<CCommunicate>())
-, m_positionArray({0})
-, m_speedArray({0})
-, m_durationArray({0})
 {
 }
 
@@ -48,20 +44,30 @@ void CCommandAL5D::Write(const std::string& rMessage)
 
 void CCommandAL5D::ClearLists()
 {
-    std::fill(m_positionArray.begin(), m_positionArray.end(), 0);
-    std::fill(m_durationArray.begin(), m_durationArray.end(), 0);
-    std::fill(m_speedArray.begin(), m_speedArray.end(), 0);
+    m_targets.clear();
+    m_positions.clear();
+    m_speeds.clear();
+    m_durations.clear();
 }
 
-void CCommandAL5D::AppendInstruction(eCommand eCommand, uint64_t position, uint64_t speed, uint64_t duration)
+void CCommandAL5D::AppendInstruction(eCommand eCommand, int8_t servo ,int64_t position, int64_t speed, int64_t duration)
 {
     switch (eCommand)
     {
         case eCommand::MOVE_COMMAND:
         {
-            m_positionArray.back() = position;
-            m_speedArray.back() = speed;
-            m_durationArray.back()= duration;
+            m_targets.push_back(servo);
+            m_positions.push_back(position);
+            m_speeds.push_back(speed);
+            m_durations.push_back(duration);
+            break;
+        }
+        case eCommand::CALIBRATE_COMMAND:
+        {
+            m_targets.push_back(servo);
+            m_positions.push_back(position);
+            m_speeds.push_back(speed);
+            m_durations.push_back(duration);
             break;
         }
         case eCommand::STOP_COMMAND:
@@ -71,17 +77,18 @@ void CCommandAL5D::AppendInstruction(eCommand eCommand, uint64_t position, uint6
         }
         case eCommand::UNKNOWN_COMMAND:
         {
-            throw "Command is unknown! Please check your message on syntax";
+            std::cout<< "Command is unknown! Please check your message on syntax" << std::endl;
             break;
         }
         default:
         {
+            std::cout<< "Command is unknown! Please check your message on syntax" << std::endl;
             break;
         }
     }
 }
 
-bool IsHardwareCompatible(eServos servo, uint64_t position)
+bool CCommandAL5D::IsHardwareCompatible(eServos servo, int64_t position)
 {
     bool success = false;
 
@@ -112,9 +119,14 @@ bool IsHardwareCompatible(eServos servo, uint64_t position)
             success = (position >= MINIMAL_DEGREES_WRIST_ROTATE && position <= MAXIMAL_DEGREES_WRIST_ROTATE);
             break;
         }
+        case eServos::GRIPPER:
+        {
+            success = (position >= MINIMAL_DEGREES_WRIST_ROTATE && position <= MAXIMAL_DEGREES_WRIST_ROTATE);
+            break;
+        }
         default:
         {
-            throw "Servo is unknown! Please check your message on syntax";
+            std::cout<< "Servo is unknown! Please check your message on syntax" << std::endl;
             break;
         }
     }
@@ -122,66 +134,64 @@ bool IsHardwareCompatible(eServos servo, uint64_t position)
     return success;
 }
 
-// Servo ID: #5 
-// Position: P1600 
-// Time    : T2500 
-// Speed   : S500
 std::string CCommandAL5D::CreateMessage()
 {
     std::string returnMessage = "";
-
-    for(int i = 0; i < m_positionArray.size(); ++i)
+    for(uint16_t i = 0; i < m_targets.size(); ++i)
     {
-        returnMessage += "#" + i;
+        returnMessage.append("#");
+        returnMessage.append(std::to_string(m_targets.at(i)));
 
-        if(!IsHardwareCompatible(eServos(i), m_positionArray[i]))
+        if(!IsHardwareCompatible(eServos(i), m_positions.at(i)))
         {
             break;
         }
 
-        if(m_positionArray[i] != -1)
+        if(m_positions.at(i) != -1)
         {
-            returnMessage += "P" + m_positionArray[i];
+            returnMessage.append("P");
+            returnMessage.append(std::to_string(m_positions.at(i)));
         }
 
-        if(m_durationArray[i] != -1)
+        if(m_durations.at(i) != -1)
         {
-            returnMessage += "T" + m_durationArray[i];
+            returnMessage.append("T");
+            returnMessage.append(std::to_string(m_durations.at(i)));
         }
 
-        if(m_speedArray[i] != -1)
+        if(m_speeds.at(i) != -1)
         {
-            returnMessage += "S" + m_speedArray[i];
+            returnMessage.append("S");
+            returnMessage.append(std::to_string(m_speeds.at(i)));
         }
+
     }
-
+    char cr = 13;
+    returnMessage += cr;
+    
     if(returnMessage.size() < 4)
     {
-        throw "[Error]: Created message doesn't suite the protocol.";
-    }
-    else
-    {
-        std::fill(m_positionArray.begin(), m_positionArray.end(), 0);
-        std::fill(m_durationArray.begin(), m_durationArray.end(), 0);
-        std::fill(m_speedArray.begin(), m_speedArray.end(), 0);
+        std::cout<< "[Error]: Created message doesn't suite the protocol."<<std::endl;
     }
 
-    std::cout << returnMessage << std::endl;
-    
+    ClearLists();    
     return returnMessage;
 }
 
 void CCommandAL5D::Execute()
 {
     // Assert if the instruction arrays aren't equal and bigger then 0. 
-    assert(m_positionArray.size() != 0);
-    assert(m_positionArray.size() == m_speedArray.size() == m_durationArray.size());
-
+    assert(m_targets.size() != 0);
     // Write Serial with the converted string.
     m_spCommunicate->WriteSerial(CreateMessage());
-}
+}   
 
 void CCommandAL5D::Stop()
 {
-    m_spCommunicate->WriteSerial(STOP_MESSAGE);
+    std::string Message = STOP_MESSAGE;
+    
+    char cr = 13;
+    Message += cr;
+    
+    m_spCommunicate->WriteSerial(Message);
 }

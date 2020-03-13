@@ -16,7 +16,7 @@
 
 CCalibration::CCalibration(std::shared_ptr<CConfiguration> spConfiguration)
 : m_spConfiguration(spConfiguration)
-, m_spMove(std::make_shared<CMove>())
+, m_spMove(std::make_shared<CMove>(spConfiguration))
 {
 }
 
@@ -25,11 +25,16 @@ CCalibration::~CCalibration()
 }
 
 void CCalibration::Execute(eCommand eCommand, std::vector<std::shared_ptr<CServoInstruction>> rServoIntructions)
-{   
+{
+    for(std::shared_ptr<CServoInstruction> instruction: rServoIntructions)
+    {
+        WriteConfig(instruction->GetTargetServo(), m_spMove->CalibrationDegreesToPwm(instruction->GetPosition()));
+    }
     m_spMove->Execute(eCommand, rServoIntructions);
 }
     
-bool CCalibration::WriteConfig(eServos eServo, uint16_t minValue, uint16_t maxValue)
+bool CCalibration::WriteConfig(eServos eServo, uint16_t value)
 {
-    m_spConfiguration->Write(eServo, minValue, maxValue);
+    m_spConfiguration->Write(eServo, value);
+    return true;
 }

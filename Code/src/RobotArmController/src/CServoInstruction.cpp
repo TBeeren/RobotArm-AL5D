@@ -1,6 +1,6 @@
 #include "CServoInstruction.h"
 
-CServoInstruction::CServoInstruction(eServos targetServo, uint64_t position, uint64_t duration, uint64_t speed)
+CServoInstruction::CServoInstruction(eServos targetServo, int64_t position, int64_t duration, int64_t speed)
 : m_targetServo(targetServo)
 , m_position(position)
 , m_duration(duration)
@@ -17,17 +17,17 @@ eServos CServoInstruction::GetTargetServo()
     return m_targetServo;
 }
 
-uint64_t CServoInstruction::GetPosition()
+int64_t CServoInstruction::GetPosition()
 {
     return m_position;
 }
 
-uint64_t CServoInstruction::GetDuration()
+int64_t CServoInstruction::GetDuration()
 {
     return m_duration;
 }
 
-uint64_t CServoInstruction::GetSpeed()
+int64_t CServoInstruction::GetSpeed()
 {
     return m_speed;
 }

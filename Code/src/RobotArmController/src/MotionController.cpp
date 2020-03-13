@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-    /* after calibrate the protocol == #2P2000D500S400 */
+    /* after calibrate the protocol == queue#1P2000S300D400!#5P600S670D890! */
     ros::init(argc, argv, "MotionController");
     ros::NodeHandle node;
     ros::Publisher calibratePublisher = node.advertise<RobotArmController::Move>("/RobotArmController/Calibrate", 1000);
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     //Calibration
     std::cout << "Calibrate using wasd and enter, type done when completed" << std::endl;
     int calibratingServo = 0;
-    std::vector<int> calibrationValues(5, 100);
+    std::vector<int> calibrationValues = {0, 0, -10, 60, 40, 70};
     while (ros::ok())
     {
         std::cin >> input;
@@ -60,15 +60,19 @@ int main(int argc, char *argv[])
             RobotArmController::Move calibrationMsg;
             servoCommand.targetServo = calibratingServo;
             servoCommand.position = calibrationValues.at(calibratingServo);
-            servoCommand.speed = 0;
-            servoCommand.duration = 0;
+            servoCommand.speed = 500;
+            servoCommand.duration = -1;
             servoCommands.push_back(servoCommand);
             calibrationMsg.instruction = servoCommands;
-            calibrationMsg.preemptive = false;
+            calibrationMsg.preemptive = true;
             calibratePublisher.publish(calibrationMsg);
         }
         ros::spinOnce();
     }
+    
+    RobotArmController::ProgrammedPosition posMsg;
+    posMsg.programmedPosition = "park";
+    programmedPositionPublisher.publish(posMsg);
     //End of Calibration
 
     while (ros::ok())
@@ -81,9 +85,6 @@ int main(int argc, char *argv[])
         else
         {
             std::cout << "Input: " << input << std::endl;
-            //Emergency Stop
-
-            //ProgrammedPositions
 
             //Controlling Servos
             size_t instructionAmount = std::count(input.begin(), input.end(), '#');
@@ -93,7 +94,6 @@ int main(int argc, char *argv[])
 
                 std::size_t commandStart = 0;
                 std::string command = "";
-                //queue#1P2000S300D400!#5P600S670D890!
 
                 //Create the message
                 RobotArmController::Move moveMsg;
@@ -117,14 +117,29 @@ int main(int argc, char *argv[])
                     std::size_t speedStart = command.find("S");
                     std::size_t durationStart = command.find("D");
 
-                    std::string servoString, positionString, durationString, speedString = "";
+                    std::string servoString = "";
+                    std::string positionString = "";
+                    if(command.find("-") != std::string::npos)
+                    {
+                        positionString.append("-");
+                        for (int i = positionStart + 2; isdigit(command[i]); ++i)
+                        {
+                            positionString += command[i];
+                        }
+                    }
+                    else
+                    {
+                        for (int i = positionStart + 1; isdigit(command[i]); ++i)
+                        {
+                            positionString += command[i];
+                        }
+                    }                    
+                    std::string durationString = "";
+                    std::string speedString = "";
+
                     for (int i = servoStart + 1; isdigit(command[i]); ++i)
                     {
                         servoString += command[i];
-                    }
-                    for (int i = positionStart + 1; isdigit(command[i]); ++i)
-                    {
-                        positionString += command[i];
                     }
                     for (int i = speedStart + 1; isdigit(command[i]); ++i)
                     {
@@ -134,21 +149,63 @@ int main(int argc, char *argv[])
                     {
                         durationString += command[i];
                     }
-                    std::cout << "Moving servo: " << servoString << " to position: " << positionString << " with max speed: " << speedString << " in " << durationString << " milliseconds?" << std::endl;
+
+                    if (servoString == "")
+                    {
+                        servoString = "-1";
+                    }
+                    if (positionString == "")
+                    {
+                        positionString = "-1";
+                    }
+                    if (durationString == "")
+                    {
+                        durationString = "-1";
+                    }
+                    if (speedString == "")
+                    {
+                        speedString = "-1";
+                    }
+                    std::cout << "Moving servo: " << servoString << " to position: " << positionString << " with max speed: " << speedString << " in " << durationString << " milliseconds" << std::endl;
 
                     RobotArmController::ServoCommand servoCommand;
                     servoCommand.targetServo = stoi(servoString);
-                    servoCommand.position = stoull(positionString);
-                    servoCommand.speed = stoull(speedString);
-                    servoCommand.duration = stoull(durationString);
+                    servoCommand.position = stoi(positionString);
+                    servoCommand.speed = stoi(speedString);
+                    servoCommand.duration = stoi(durationString);
                     servoCommands.push_back(servoCommand);
                 }
                 moveMsg.instruction = servoCommands;
                 movePublisher.publish(moveMsg);
             }
+            else
+            {
+                if (input == "straight")
+                {
+                    RobotArmController::ProgrammedPosition posMsg;
+                    posMsg.programmedPosition = "straight";
+                    programmedPositionPublisher.publish(posMsg);
+                }
+                else if (input == "park")
+                {
+                    RobotArmController::ProgrammedPosition posMsg;
+                    posMsg.programmedPosition = "park";
+                    programmedPositionPublisher.publish(posMsg);
+                }
+                else if (input == "ready")
+                {
+                    RobotArmController::ProgrammedPosition posMsg;
+                    posMsg.programmedPosition = "ready";
+                    programmedPositionPublisher.publish(posMsg);
+                }
+                else if (input == "stop")
+                {
+                    RobotArmController::EmergencyStop stopMsg;
+                    stopPublisher.publish(stopMsg);
+                }
+            }
         }
         ros::spinOnce();
     }
-    //for(int i = 0; )
     return 0;
 }
