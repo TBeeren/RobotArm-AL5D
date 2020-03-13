@@ -39,7 +39,9 @@ bool CCommunicate::Close()
 	if(m_serialPort.is_open())
 	{
 		m_serialPort.close();
+		return true;
 	}
+	return false;
 }
 
 bool CCommunicate::WriteSerial(const std::string& rMessage)
